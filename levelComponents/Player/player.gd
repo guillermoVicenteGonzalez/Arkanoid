@@ -1,0 +1,69 @@
+class_name Player extends CharacterBody2D
+
+@export var res:PlayerResource
+
+var size:int : set = _setSize, get = _getSize
+var speed:float
+var acc:float
+var friction:float
+
+var _direction:Vector2
+
+##############################################################
+# LIFECYCLE
+##############################################################
+
+func _ready() -> void:
+	initializeResource(res)
+	pass
+	
+func _physics_process(delta: float) -> void:
+	_direction = handleInput()
+	velocity = handleMovement(velocity, _direction, speed, acc,friction,delta)
+	move_and_slide()
+	pass
+	
+##############################################################
+# Actions
+##############################################################
+	
+func handleMovement(v:Vector2, direction:Vector2, s:float, a:float, f:float, delta:float) -> Vector2:
+	if direction == Vector2.ZERO:
+		return v.move_toward(Vector2.ZERO, delta * f)
+	else:
+		return v.move_toward(direction * s, delta * a)
+		
+##############################################################
+# UTILS
+##############################################################
+
+func initializeResource(r:PlayerResource):
+	if r.speed != null: speed = r.speed
+	if r.size != null: size = r.size
+	if r.acc != null: acc = r.acc
+	if r.friction != null: friction = r.friction
+
+
+func handleInput()->Vector2:
+	var tempDir := Vector2.ZERO
+	if Input.is_action_pressed("left"): tempDir.x = -1
+	if Input.is_action_pressed("right"): tempDir.x = 1
+	return tempDir
+	
+##############################################################
+# Getters and setters
+##############################################################
+
+##Sets the internal variable size and modifies every related node in the player scene
+func _setSize(nSize:int):
+	size = nSize
+	#setSizeOfRect
+	#SetSize of collider
+	pass
+
+func _getSize()->int:
+	return size
+	
+##############################################################
+# EVENTS
+##############################################################

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://byccl14ei4cc8"]
+
+[ext_resource type="Script" path="res://levelComponents/Player/player.gd" id="1_85ara"]
+[ext_resource type="Resource" uid="uid://ce4m5x7gxcyed" path="res://levelComponents/Player/defaultPlayer.tres" id="2_k1igb"]
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_85ara")
+res = ExtResource("2_k1igb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -103.0
+offset_top = -19.0
+offset_right = 103.0
+offset_bottom = 21.0

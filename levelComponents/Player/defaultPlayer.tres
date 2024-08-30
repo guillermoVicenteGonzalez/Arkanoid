@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerResource" load_steps=2 format=3 uid="uid://ce4m5x7gxcyed"]
+
+[ext_resource type="Script" path="res://levelComponents/Player/player_resource.gd" id="1_d2lmg"]
+
+[resource]
+script = ExtResource("1_d2lmg")
+size = 10
+speed = 200.0
+acc = 500.0
+friction = 300.0
