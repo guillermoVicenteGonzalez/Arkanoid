@@ -1,8 +1,14 @@
 class_name Player extends CharacterBody2D
 
-@export var res:PlayerResource
+const BASE_HEIGHT = 16
+const BASE_WIDTH = 128
 
-var size:int : set = _setSize, get = _getSize
+@onready var player_collision: CollisionShape2D = %playerCollision
+@onready var player_fill: ColorRect = %playerFill
+
+@export var res:PlayerResource : set = setResource
+
+var size:int = 208 : set = _setSize, get = _getSize
 var speed:float
 var acc:float
 var friction:float
@@ -39,7 +45,7 @@ func handleMovement(v:Vector2, direction:Vector2, s:float, a:float, f:float, del
 
 func initializeResource(r:PlayerResource):
 	if r.speed != null: speed = r.speed
-	if r.size != null: size = r.size
+	#if r.size != null: size = r.size
 	if r.acc != null: acc = r.acc
 	if r.friction != null: friction = r.friction
 
@@ -54,11 +60,21 @@ func handleInput()->Vector2:
 # Getters and setters
 ##############################################################
 
+func setResource(r:PlayerResource):
+	print_debug("setting resource")
+	res = r
+	initializeResource(r)
+
 ##Sets the internal variable size and modifies every related node in the player scene
 func _setSize(nSize:int):
 	size = nSize
-	#setSizeOfRect
-	#SetSize of collider
+	var sizeVector := Vector2(size , BASE_HEIGHT) 
+	player_fill.size = sizeVector
+	player_fill.position = -1 *  player_fill.size / 2
+	
+	var nShape = RectangleShape2D.new()
+	nShape.size = sizeVector
+	player_collision.shape = nShape
 	pass
 
 func _getSize()->int:

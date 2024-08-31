@@ -12,6 +12,10 @@ static func instantiateLevel(size:Vector2)-> Level:
 
 func initializeLevel():
 	# Set dimensions
+	# Set player in the middle
+	# Set walls
+	# Set "goal"
+	# Set blocks
 	pass
 
 func _setupBlocks():
