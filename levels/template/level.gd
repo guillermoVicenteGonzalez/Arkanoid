@@ -5,7 +5,7 @@ class_name Level extends Node2D
 var speed:float = 1
 var score:int = 0
 
-static func instantiateLevel(size:Vector2)-> Level:
+static func instantiateLevel(levelSize:Vector2)-> Level:
 	var l := Level.new()
 	return l
 

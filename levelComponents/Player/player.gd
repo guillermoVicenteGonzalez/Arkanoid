@@ -61,7 +61,6 @@ func handleInput()->Vector2:
 ##############################################################
 
 func setResource(r:PlayerResource):
-	print_debug("setting resource")
 	res = r
 	initializeResource(r)
 
