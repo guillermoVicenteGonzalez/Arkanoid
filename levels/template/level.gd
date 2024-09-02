@@ -7,6 +7,7 @@ var score:int = 0
 
 static func instantiateLevel(levelSize:Vector2)-> Level:
 	var l := Level.new()
+	l.size = levelSize
 	return l
 
 

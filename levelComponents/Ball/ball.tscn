@@ -14,7 +14,7 @@ physics_material_override = SubResource("PhysicsMaterial_hei8f")
 gravity_scale = 0.0
 script = ExtResource("1_vc2e2")
 sphereColor = Color(0.823529, 1, 1, 1)
-speed = 200.0
+speed = 300.0
 radius = 10.295
 
 [node name="ballCollision" type="CollisionShape2D" parent="."]

@@ -13,3 +13,4 @@ motion_mode = 1
 
 [node name="Ball" parent="." instance=ExtResource("3_pjott")]
 position = Vector2(647, 64)
+radius = 19.295

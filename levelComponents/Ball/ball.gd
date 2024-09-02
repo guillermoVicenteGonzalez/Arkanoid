@@ -7,10 +7,9 @@ class_name Ball extends RigidBody2D
 
 @export var sphereColor:Color = Color.WHITE : set = setColor
 @export var speed:float = 350 : set = setSpeed
-#@export var shape:CircleShape2D: set = setShape
+@export var radius:float = 0 : set = setRadius
 
 var _shape := CircleShape2D.new() : set = _setShape
-@export var radius:float = 0 : set = setRadius
 var direction:Vector2 = Vector2(0,1)
 
 
@@ -34,7 +33,6 @@ func setSpeed(s:float):
 
 func _setShape(nShape:CircleShape2D):
 	_shape = nShape
-	radius = _shape.radius
 	queue_redraw()
 	
 	# include drawn shape code here
@@ -63,4 +61,4 @@ func setRadius(nRadius:float):
 func _on_ball_area_body_entered(body: Node2D) -> void:
 	print_debug(body)
 	if body is Player:
-		direction = Vector2(0,-1)
+		direction *= -1
