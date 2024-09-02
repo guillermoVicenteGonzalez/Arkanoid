@@ -5,33 +5,28 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hei8f"]
 bounce = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_va2hh"]
-radius = 20.34
+[sub_resource type="CircleShape2D" id="CircleShape2D_0f2d8"]
+radius = 10.295
 
 [node name="Ball" type="RigidBody2D"]
 mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_hei8f")
 gravity_scale = 0.0
 script = ExtResource("1_vc2e2")
+sphereColor = Color(0.823529, 1, 1, 1)
 speed = 200.0
-shape = SubResource("CircleShape2D_va2hh")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+radius = 10.295
 
 [node name="ballCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(20, 20)
-shape = SubResource("CircleShape2D_va2hh")
+shape = SubResource("CircleShape2D_0f2d8")
 
 [node name="ballArea" type="Area2D" parent="."]
 unique_name_in_owner = true
 
 [node name="areaShape" type="CollisionShape2D" parent="ballArea"]
 unique_name_in_owner = true
-position = Vector2(20, 20)
-shape = SubResource("CircleShape2D_va2hh")
+shape = SubResource("CircleShape2D_0f2d8")
 debug_color = Color(0.965672, 0, 0.485265, 0.42)
 
 [connection signal="body_entered" from="ballArea" to="." method="_on_ball_area_body_entered"]
