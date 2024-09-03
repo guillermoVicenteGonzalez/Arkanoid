@@ -10,22 +10,25 @@ class_name Ball extends RigidBody2D
 @export var radius:float = 0 : set = setRadius
 
 var _shape := CircleShape2D.new() : set = _setShape
-var direction:Vector2 = Vector2(0,1)
+var direction: int = 1
 
 
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
-		linear_velocity = handleMovement(speed, direction, delta)
+		#linear_velocity = handleMovement(speed, direction, delta)
+		linear_velocity = handleMovement(speed, direction, linear_velocity, delta)
 
 
 func _draw() -> void:
 	draw_circle(Vector2(0,0),radius,sphereColor, true)
 
 	
-func handleMovement(sp:float, dir:Vector2, _delta:float)->Vector2:
+func handleMovement(sp:float, dir:int, vel:Vector2, _delta:float)->Vector2:
 	#print_debug(speed)
 	#return speed * direction * delta
-	return sp * dir
+	#return sp * dir
+	vel.y = sp * dir
+	return vel
 
 func setSpeed(s:float):
 	speed = s
@@ -46,7 +49,6 @@ func _setShape(nShape:CircleShape2D):
 func setColor(nColor:Color):
 	sphereColor = nColor
 	queue_redraw()
-	print_debug("queue redraw ?")
 
 
 func setRadius(nRadius:float):
@@ -62,3 +64,7 @@ func _on_ball_area_body_entered(body: Node2D) -> void:
 	print_debug(body)
 	if body is Player:
 		direction *= -1
+		
+	if body is Block:
+		direction *= -1
+		body.hit()

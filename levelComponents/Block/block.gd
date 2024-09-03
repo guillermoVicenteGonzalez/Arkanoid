@@ -8,7 +8,9 @@ enum blockType{
 	hard
 }
 
-@export var size:Vector2 = Vector2(2,1) : set = setSize
+@onready var block_collision: CollisionShape2D = %blockCollision
+
+@export var size:Vector2 = Vector2(8,2) : set = setSize
 @export var type:blockType = blockType.easy : set = setBlockType
 
 var max_health:int = 1
@@ -20,10 +22,12 @@ static func instantiateBlock():
 	pass
 
 
-func _draw():
-	print_debug("draw")
-	draw_rect(Rect2(Vector2(0,0), size * CONSTANTS.CELL_SIZE),blockColor)
+func _ready():
+	print_debug(max_health)
+	health = max_health
 
+func _draw():
+	draw_rect(Rect2(Vector2(0,0), size * CONSTANTS.CELL_SIZE),blockColor)
 
 
 ##############################################################
@@ -34,6 +38,13 @@ func death():
 	# Particles
 	queue_free()
 
+func hit():
+	print_debug("hit")
+	health -= 1
+	if health <= 0:
+		death()
+			
+	
 
 ##############################################################
 # Getters and setters
@@ -65,6 +76,9 @@ func setColor(nColor:Color):
 
 func setSize(nSize:Vector2):
 	size = nSize
+	if block_collision != null:
+		block_collision.shape.size = size * CONSTANTS.CELL_SIZE
+		block_collision.position = size * CONSTANTS.CELL_SIZE / 2
 	queue_redraw()
 
 ## If provided an argument returns the name of the type passed. Else it just returns the name of the current block type

@@ -24,3 +24,13 @@ func _setupBlocks():
 	# Random algorithm for types
 	# Difficulty settings defines how many bad triangles
 	pass
+
+func _levelFinished():
+	# gets triggered by event
+	pass
+	
+func _checkLevelFinished():
+	# Gets triggered when a block emits the destroy signal
+	# we get elements in group blocks
+	# if it is 0 => _levelFinished()
+	pass

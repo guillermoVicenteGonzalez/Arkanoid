@@ -1,8 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bes87j8yp3rbn"]
+[gd_scene load_steps=3 format=3 uid="uid://bes87j8yp3rbn"]
 
 [ext_resource type="Script" path="res://levelComponents/Block/block.gd" id="1_jrllv"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpsvs"]
+size = Vector2(63.6, 16)
+
 [node name="block" type="StaticBody2D"]
 script = ExtResource("1_jrllv")
-size = Vector2(4, 1)
 type = 2
+
+[node name="blockCollision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(32, 8)
+shape = SubResource("RectangleShape2D_xpsvs")
