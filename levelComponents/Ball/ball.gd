@@ -62,6 +62,7 @@ func _setShape(nShape:CircleShape2D):
 		ball_collision.shape = nShape
 	
 	if area_shape != null:
+		nShape.radius = nShape.radius + 2
 		area_shape.shape = nShape
 
 
@@ -80,13 +81,17 @@ func setRadius(nRadius:float):
 # EVENTS
 ##############################################################
 
-func _on_ball_area_body_entered(body: Node2D) -> void:
-	print_debug(body)
+
+
+
+
+func _on_body_entered(body: Node) -> void:
 	if body is Player || body is Block:
 		direction *= -1
 
 	else:
-		linear_velocity.x *= -1
+		print_debug("wall")
+		#linear_velocity.x *= -1
 		
 	if body is Block:
 		body.hit()

@@ -1,2 +1,7 @@
 # Arkanoid
- Arkanoid clone to practice godot
+
+Arkanoid clone to practice godot
+
+## Todo
+
+- []

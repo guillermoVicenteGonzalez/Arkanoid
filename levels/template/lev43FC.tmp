@@ -1,18 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://nm7btqj3cjum"]
+[gd_scene load_steps=6 format=3 uid="uid://nm7btqj3cjum"]
 
 [ext_resource type="PackedScene" uid="uid://byccl14ei4cc8" path="res://levelComponents/Player/player.tscn" id="1_r67a2"]
 [ext_resource type="Script" path="res://levels/template/level.gd" id="1_y4mds"]
 [ext_resource type="PackedScene" uid="uid://co1n6wh7shscq" path="res://levelComponents/Ball/ball.tscn" id="3_pjott"]
 [ext_resource type="PackedScene" uid="uid://bes87j8yp3rbn" path="res://levelComponents/Block/block.tscn" id="4_ovxqc"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h48pn"]
-bounce = 1.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fqe84"]
 size = Vector2(29.9041, 1262.04)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_al6yu"]
-bounce = 1.0
 
 [node name="levelTemplate" type="Node2D"]
 script = ExtResource("1_y4mds")
@@ -31,7 +25,6 @@ position = Vector2(396, 2)
 size = Vector2(65.075, 3)
 
 [node name="CollisionShape2D" type="StaticBody2D" parent="."]
-physics_material_override = SubResource("PhysicsMaterial_h48pn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D"]
 position = Vector2(387, 402)
@@ -39,7 +32,6 @@ shape = SubResource("RectangleShape2D_fqe84")
 
 [node name="CollisionShape2D2" type="StaticBody2D" parent="."]
 position = Vector2(1280, 8)
-physics_material_override = SubResource("PhysicsMaterial_al6yu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D2"]
 position = Vector2(-382, 399)
