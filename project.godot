@@ -10,9 +10,24 @@ config_version=5
 
 [application]
 
-config/name="Nuevo Proyecto de Juego"
+config/name="Arkanoid"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+CONSTANTS="*res://globals/CONSTANTS.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=800
+window/stretch/mode="canvas_items"
+
+[global_group]
+
+collidable="The ball can collide with it"
+Player="The player"
 
 [input]
 
