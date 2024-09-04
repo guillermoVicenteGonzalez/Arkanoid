@@ -5,9 +5,9 @@
 
 [sub_resource type="Resource" id="Resource_pccwc"]
 script = ExtResource("2_ucspe")
-speed = 350.0
-acc = 800.0
-friction = 500.0
+speed = 600.0
+acc = 1000.0
+friction = 900.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1s3v"]
 size = Vector2(128, 16)

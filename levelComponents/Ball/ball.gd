@@ -2,16 +2,24 @@
 
 class_name Ball extends RigidBody2D
 
-@onready var ball_collision: CollisionShape2D = %ballCollision
-@onready var area_shape: CollisionShape2D = %areaShape
-
+# Export variables
 @export var sphereColor:Color = Color.WHITE : set = setColor
 @export var speed:float = 350 : set = setSpeed
 @export var radius:float = 0 : set = setRadius
 
-var _shape := CircleShape2D.new() : set = _setShape
+# public variables
 var direction: int = 1
 
+# private variables
+var _shape := CircleShape2D.new() : set = _setShape
+
+# onready variables
+@onready var ball_collision: CollisionShape2D = %ballCollision
+@onready var area_shape: CollisionShape2D = %areaShape
+
+##############################################################
+# LIFECYCLE
+##############################################################
 
 func _physics_process(delta: float) -> void:
 	if not Engine.is_editor_hint():
@@ -22,7 +30,10 @@ func _physics_process(delta: float) -> void:
 func _draw() -> void:
 	draw_circle(Vector2(0,0),radius,sphereColor, true)
 
-	
+##############################################################
+# Actions
+##############################################################
+
 func handleMovement(sp:float, dir:int, vel:Vector2, _delta:float)->Vector2:
 	#print_debug(speed)
 	#return speed * direction * delta
@@ -30,9 +41,17 @@ func handleMovement(sp:float, dir:int, vel:Vector2, _delta:float)->Vector2:
 	vel.y = sp * dir
 	return vel
 
+
+func death():
+	queue_free()
+
+##############################################################
+# Getters and setters
+##############################################################
+
 func setSpeed(s:float):
 	speed = s
-	
+
 
 func _setShape(nShape:CircleShape2D):
 	_shape = nShape
@@ -44,7 +63,7 @@ func _setShape(nShape:CircleShape2D):
 	
 	if area_shape != null:
 		area_shape.shape = nShape
-	
+
 
 func setColor(nColor:Color):
 	sphereColor = nColor
@@ -57,14 +76,18 @@ func setRadius(nRadius:float):
 	_shape = _shape
 	queue_redraw()
 
-	
-
+##############################################################
+# EVENTS
+##############################################################
 
 func _on_ball_area_body_entered(body: Node2D) -> void:
 	print_debug(body)
-	if body is Player:
+	if body is Player || body is Block:
 		direction *= -1
+
+	else:
+		linear_velocity.x *= -1
 		
 	if body is Block:
-		direction *= -1
 		body.hit()
+		

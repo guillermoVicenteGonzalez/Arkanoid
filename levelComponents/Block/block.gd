@@ -8,7 +8,6 @@ enum blockType{
 	hard
 }
 
-@onready var block_collision: CollisionShape2D = %blockCollision
 
 @export var size:Vector2 = Vector2(8,2) : set = setSize
 @export var type:blockType = blockType.easy : set = setBlockType
@@ -18,13 +17,19 @@ var health:int = 1
 var score:int = 1 
 var blockColor := Color.WHITE : set = setColor
 
-static func instantiateBlock():
-	pass
+@onready var block_collision: CollisionShape2D = %blockCollision
 
+
+##############################################################
+# LIFECYCLE
+##############################################################
 
 func _ready():
+	#var deleteThis := Vector2()
+	size = size
 	print_debug(max_health)
 	health = max_health
+
 
 func _draw():
 	draw_rect(Rect2(Vector2(0,0), size * CONSTANTS.CELL_SIZE),blockColor)
@@ -38,13 +43,20 @@ func death():
 	# Particles
 	queue_free()
 
+
 func hit():
 	print_debug("hit")
 	health -= 1
 	if health <= 0:
 		death()
-			
-	
+
+##############################################################
+# LIFECYCLE
+##############################################################
+
+static func instantiateBlock():
+	pass
+
 
 ##############################################################
 # Getters and setters
@@ -87,3 +99,8 @@ func getBlockType(bType:blockType)->String:
 		return blockType.keys()[bType]
 	else:
 		return blockType.keys()[type]
+
+
+##############################################################
+# EVENTS
+##############################################################

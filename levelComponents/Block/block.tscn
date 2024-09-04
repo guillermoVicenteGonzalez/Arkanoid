@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://levelComponents/Block/block.gd" id="1_jrllv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpsvs"]
-size = Vector2(63.6, 16)
+size = Vector2(520.6, 24)
 
 [node name="block" type="StaticBody2D"]
 script = ExtResource("1_jrllv")
