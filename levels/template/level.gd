@@ -41,12 +41,21 @@ func _checkLevelFinished():
 	pass
 
 func createWalls(levelSize:Vector2):
-	print_debug("creating walls")
 	var wallSize = Vector2(1,levelSize.y)
+	var horizontalSize = Vector2(levelSize.x, 1)
+	
 	var leftWall := Wall.instantiateWall(Vector2(0,0))
 	var rightWall := Wall.instantiateWall(Vector2(levelSize.x, 0))
+	var topWall := Wall.instantiateWall(Vector2(0,-1))
+	var outOfBounds := OutOfBounds.instantiateOutOfBounds(Vector2(0,levelSize.y -1))
+	
 	add_child(leftWall)
 	add_child(rightWall)
+	add_child(topWall)
+	add_child(outOfBounds)
+	
 	leftWall.size = wallSize
 	rightWall.size = wallSize
+	topWall.size = horizontalSize
+	outOfBounds.size = horizontalSize
 	
