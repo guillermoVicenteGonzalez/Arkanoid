@@ -3,9 +3,6 @@ class_name Player extends CharacterBody2D
 const BASE_HEIGHT = 16
 const BASE_WIDTH = 128
 
-@onready var player_collision: CollisionShape2D = %playerCollision
-@onready var player_fill: ColorRect = %playerFill
-
 @export var res:PlayerResource : set = setResource
 
 var size:int = 208 : set = _setSize, get = _getSize
@@ -14,6 +11,9 @@ var acc:float
 var friction:float
 
 var _direction:Vector2
+
+@onready var player_collision: CollisionShape2D = %playerCollision
+@onready var player_fill: ColorRect = %playerFill
 
 ##############################################################
 # LIFECYCLE
