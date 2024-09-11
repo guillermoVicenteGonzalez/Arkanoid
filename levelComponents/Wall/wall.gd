@@ -3,7 +3,13 @@ class_name Wall extends StaticBody2D
 
 const WALL_SCENE_PATH = "res://levelComponents/Wall/wall.tscn"
 
+enum BounceDirection{
+	HORIZONTAL,
+	VERTICAL
+}
+
 @export var size:Vector2 : set = setSize
+@export var bounceDirection:BounceDirection = BounceDirection.HORIZONTAL
 
 var _shape := RectangleShape2D.new()
 

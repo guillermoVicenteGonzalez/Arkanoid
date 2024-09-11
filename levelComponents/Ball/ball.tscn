@@ -9,7 +9,7 @@ bounce = 1.0
 radius = 11.295
 
 [node name="Ball" type="RigidBody2D"]
-mass = 10.0
+mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_hei8f")
 gravity_scale = 0.0
 contact_monitor = true

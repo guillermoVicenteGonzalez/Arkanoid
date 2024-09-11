@@ -9,8 +9,8 @@
 script = ExtResource("1_y4mds")
 
 [node name="player" parent="." instance=ExtResource("1_r67a2")]
+unique_name_in_owner = true
 position = Vector2(644, 764)
-motion_mode = 1
 
 [node name="Ball" parent="." instance=ExtResource("3_pjott")]
 position = Vector2(647, 64)

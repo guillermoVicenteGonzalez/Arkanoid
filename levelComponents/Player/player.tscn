@@ -13,6 +13,7 @@ friction = 900.0
 size = Vector2(128, 16)
 
 [node name="player" type="CharacterBody2D" groups=["Player", "collidable"]]
+motion_mode = 1
 script = ExtResource("1_85ara")
 res = SubResource("Resource_pccwc")
 

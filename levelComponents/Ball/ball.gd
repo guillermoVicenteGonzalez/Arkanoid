@@ -89,9 +89,10 @@ func _on_body_entered(body: Node) -> void:
 	if body is Player || body is Block:
 		direction *= -1
 
-	else:
+	elif body is Wall:
 		print_debug("wall")
-		#linear_velocity.x *= -1
+		if body.bounceDirection == Wall.BounceDirection.VERTICAL:
+			direction *= -1
 		
 	if body is Block:
 		body.hit()
