@@ -6,6 +6,8 @@
 size = Vector2(520.6, 24)
 
 [node name="block" type="StaticBody2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_jrllv")
 type = 2
 
