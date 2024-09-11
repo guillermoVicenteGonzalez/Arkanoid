@@ -25,6 +25,7 @@ func initializeLevel():
 	player.global_position = Vector2(_levelCenter.x, size.y - 50)
 	createWalls(size)
 	# Set blocks
+	createBlocks()
 	pass
 
 func _setupBlocks():
@@ -62,4 +63,37 @@ func createWalls(levelSize:Vector2):
 	rightWall.size = wallSize
 	topWall.size = horizontalSize
 	outOfBounds.size = horizontalSize
+
+
+func createBlock(difficulty:int, pos:Vector2):
+	var blockScene:PackedScene = load("res://levelComponents/Block/block.tscn")
+	var blockInstance:Block = blockScene.instantiate()
+	blockInstance.global_position = pos
+	blockInstance.blockDeath.connect(addScore)
+	add_child(blockInstance)
+	pass
+
+
+func createBlocks():
+	var maxLength := size.x
+	var maxHeight := size.y / 2
+	var blockPos:= Vector2(0,0)
+	var iterationCount = 1
 	
+	while blockPos.y < maxHeight:
+		
+		while blockPos.x < maxLength:
+			createBlock(1,blockPos)
+			blockPos.x += Block.DEFAULT_SIZE.x 
+			print_debug(blockPos)
+			
+		blockPos.y += Block.DEFAULT_SIZE.y 
+		blockPos.x = iterationCount * Block.DEFAULT_SIZE.x
+		maxLength -= Block.DEFAULT_SIZE.x
+		iterationCount += 1
+
+	pass
+
+func addScore():
+	print_debug(score)
+	score += 1

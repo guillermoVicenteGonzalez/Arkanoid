@@ -1,17 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bes87j8yp3rbn"]
+[gd_scene load_steps=4 format=3 uid="uid://bes87j8yp3rbn"]
 
 [ext_resource type="Script" path="res://levelComponents/Block/block.gd" id="1_jrllv"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r4frk"]
+bounce = 1.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpsvs"]
-size = Vector2(520.6, 24)
+size = Vector2(512, 128)
 
 [node name="block" type="StaticBody2D"]
 collision_layer = 8
 collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_r4frk")
 script = ExtResource("1_jrllv")
-type = 2
 
 [node name="blockCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(32, 8)
+position = Vector2(256, 64)
 shape = SubResource("RectangleShape2D_xpsvs")

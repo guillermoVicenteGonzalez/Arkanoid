@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://nm7btqj3cjum"]
+[gd_scene load_steps=5 format=3 uid="uid://nm7btqj3cjum"]
 
 [ext_resource type="PackedScene" uid="uid://byccl14ei4cc8" path="res://levelComponents/Player/player.tscn" id="1_r67a2"]
 [ext_resource type="Script" path="res://levels/template/level.gd" id="1_y4mds"]
 [ext_resource type="PackedScene" uid="uid://co1n6wh7shscq" path="res://levelComponents/Ball/ball.tscn" id="3_pjott"]
+[ext_resource type="PackedScene" uid="uid://bes87j8yp3rbn" path="res://levelComponents/Block/block.tscn" id="4_ovxqc"]
 
 [node name="levelTemplate" type="Node2D"]
 script = ExtResource("1_y4mds")
@@ -12,9 +13,14 @@ unique_name_in_owner = true
 position = Vector2(644, 764)
 
 [node name="Ball" parent="." instance=ExtResource("3_pjott")]
-position = Vector2(649, 662)
+position = Vector2(647, 64)
 physics_material_override = null
 linear_velocity = Vector2(0, 300)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[node name="block" parent="." instance=ExtResource("4_ovxqc")]
+
+[node name="block2" parent="." instance=ExtResource("4_ovxqc")]
+position = Vector2(8, 0)
