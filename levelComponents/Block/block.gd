@@ -4,6 +4,9 @@ class_name Block extends StaticBody2D
 
 signal blockDeath
 
+const BORDER_COLOR := Color.BLACK
+const BORDER_WIDTH := 0.5
+
 const DAMAGE_COLORS = {
 	healthy = Color.WHITE,
 	medium = Color.YELLOW,
@@ -32,7 +35,7 @@ var max_health:int = 1
 var health:int = 1
 var score:int = 1 
 var blockColor := Color.WHITE : set = setColor
-var outlineColor := Color.YELLOW : set = setOutlineColor
+var outlineColor := DAMAGE_COLORS.healthy : set = setOutlineColor
 
 @onready var block_collision: CollisionShape2D = %blockCollision
 
@@ -50,6 +53,7 @@ func _ready():
 func _draw():
 	draw_rect(Rect2(Vector2(0,0), size ),blockColor)
 	draw_rect(Rect2(Vector2 (outlineSize / 2, outlineSize / 2), size - Vector2(outlineSize, outlineSize)),outlineColor,false,outlineSize,false)
+	draw_rect(Rect2(Vector2 (BORDER_WIDTH / 2, BORDER_WIDTH / 2), size - Vector2(BORDER_WIDTH, BORDER_WIDTH)),BORDER_COLOR,false,BORDER_WIDTH,false)
 
 
 ##############################################################
@@ -68,10 +72,10 @@ func hit():
 		death()
 		
 	var diff = max_health - health
-	if diff <= 1:
-		pass
-	elif diff >= 2:
-		pass
+	if diff <= 1 and max_health > 2:
+		outlineColor = DAMAGE_COLORS.medium
+	elif diff >= 2 or max_health <= 2:
+		outlineColor = DAMAGE_COLORS.damaged
 
 ##############################################################
 # LIFECYCLE

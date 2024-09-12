@@ -69,7 +69,12 @@ func createWalls(levelSize:Vector2):
 func createBlock(difficulty:int, pos:Vector2):
 	var blockScene:PackedScene = load("res://levelComponents/Block/block.tscn")
 	var blockInstance:Block = blockScene.instantiate()
-	blockInstance.type = Block.blockType.hard
+	
+	var temp = randi_range(1,3)
+	if temp == 1: blockInstance.type = Block.blockType.easy
+	if temp == 2: blockInstance.type = Block.blockType.medium
+	if temp == 3: blockInstance.type = Block.blockType.hard
+	
 	blockInstance.global_position = pos
 	blockInstance.blockDeath.connect(addScore)
 	add_child(blockInstance)

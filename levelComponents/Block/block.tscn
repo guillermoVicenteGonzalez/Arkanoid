@@ -13,9 +13,11 @@ collision_layer = 8
 collision_mask = 2
 physics_material_override = SubResource("PhysicsMaterial_r4frk")
 script = ExtResource("1_jrllv")
-type = 1
+type = 2
+outlineSize = 1.5
 
 [node name="blockCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(32, 8)
 shape = SubResource("RectangleShape2D_xpsvs")
