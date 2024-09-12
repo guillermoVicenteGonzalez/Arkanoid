@@ -2,6 +2,7 @@ class_name Level extends Node2D
 
 
 @export var size := Vector2(1280, 800)
+@export var hud:HUD
 
 var speed:float = 1
 var score:int = 0
@@ -25,7 +26,7 @@ func initializeLevel():
 	player.global_position = Vector2(_levelCenter.x, size.y - 50)
 	createWalls(size)
 	# Set blocks
-	createBlocks()
+	triangleShapedBlocks()
 	pass
 
 func _setupBlocks():
@@ -74,7 +75,7 @@ func createBlock(difficulty:int, pos:Vector2):
 	pass
 
 
-func createBlocks():
+func triangleShapedBlocks():
 	var maxLength := size.x
 	var maxHeight := size.y / 2
 	var blockPos:= Vector2(0,0)
@@ -85,7 +86,6 @@ func createBlocks():
 		while blockPos.x < maxLength:
 			createBlock(1,blockPos)
 			blockPos.x += Block.DEFAULT_SIZE.x 
-			print_debug(blockPos)
 			
 		blockPos.y += Block.DEFAULT_SIZE.y 
 		blockPos.x = iterationCount * Block.DEFAULT_SIZE.x
@@ -95,5 +95,5 @@ func createBlocks():
 	pass
 
 func addScore():
-	print_debug(score)
 	score += 1
+	hud.setScore(score)
