@@ -6,7 +6,7 @@
 bounce = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpsvs"]
-size = Vector2(512, 128)
+size = Vector2(64, 16)
 
 [node name="block" type="StaticBody2D"]
 collision_layer = 8
@@ -16,5 +16,5 @@ script = ExtResource("1_jrllv")
 
 [node name="blockCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(256, 64)
+position = Vector2(32, 8)
 shape = SubResource("RectangleShape2D_xpsvs")

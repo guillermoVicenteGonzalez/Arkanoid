@@ -30,7 +30,6 @@ var blockColor := Color.WHITE : set = setColor
 func _ready():
 	#var deleteThis := Vector2()
 	size = size
-	print_debug(max_health)
 	health = max_health
 
 
@@ -44,12 +43,11 @@ func _draw():
 
 func death():
 	# Particles
-	blockDeath
+	blockDeath.emit()
 	queue_free()
 
 
 func hit():
-	print_debug("hit")
 	health -= 1
 	if health <= 0:
 		death()

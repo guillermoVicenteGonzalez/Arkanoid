@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://nm7btqj3cjum"]
+[gd_scene load_steps=5 format=3 uid="uid://nm7btqj3cjum"]
 
 [ext_resource type="PackedScene" uid="uid://byccl14ei4cc8" path="res://levelComponents/Player/player.tscn" id="1_r67a2"]
 [ext_resource type="Script" path="res://levels/template/level.gd" id="1_y4mds"]
 [ext_resource type="PackedScene" uid="uid://co1n6wh7shscq" path="res://levelComponents/Ball/ball.tscn" id="3_pjott"]
+[ext_resource type="PackedScene" uid="uid://utm2fmxysab7" path="res://UI/HUD/hud.tscn" id="5_iqo4x"]
 
-[node name="levelTemplate" type="Node2D"]
+[node name="levelTemplate" type="Node2D" node_paths=PackedStringArray("hud")]
 script = ExtResource("1_y4mds")
+hud = NodePath("HUD")
 
 [node name="player" parent="." instance=ExtResource("1_r67a2")]
 unique_name_in_owner = true
@@ -18,3 +20,5 @@ linear_velocity = Vector2(0, 300)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
+
+[node name="HUD" parent="." instance=ExtResource("5_iqo4x")]
