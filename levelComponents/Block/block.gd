@@ -4,6 +4,18 @@ class_name Block extends StaticBody2D
 
 signal blockDeath
 
+const DAMAGE_COLORS = {
+	healthy = Color.WHITE,
+	medium = Color.YELLOW,
+	damaged = Color.BLUE_VIOLET
+}
+
+const DIFFICULTY_COLORS = {
+	easy = Color.WHITE,
+	medium = Color.GREEN,
+	hard = Color.RED
+}
+
 enum blockType{
 	easy,
 	medium,
@@ -14,11 +26,13 @@ const DEFAULT_SIZE:Vector2 = Vector2(Constants.CELL_SIZE * 8, Constants.CELL_SIZ
 
 @export var size:Vector2 = DEFAULT_SIZE : set = setSize
 @export var type:blockType = blockType.easy : set = setBlockType
+@export_range(1,5) var outlineSize:float = 1 : set = setOutlineSize
 
 var max_health:int = 1
 var health:int = 1
 var score:int = 1 
 var blockColor := Color.WHITE : set = setColor
+var outlineColor := Color.YELLOW : set = setOutlineColor
 
 @onready var block_collision: CollisionShape2D = %blockCollision
 
@@ -35,6 +49,7 @@ func _ready():
 
 func _draw():
 	draw_rect(Rect2(Vector2(0,0), size ),blockColor)
+	draw_rect(Rect2(Vector2 (outlineSize / 2, outlineSize / 2), size - Vector2(outlineSize, outlineSize)),outlineColor,false,outlineSize,false)
 
 
 ##############################################################
@@ -51,6 +66,12 @@ func hit():
 	health -= 1
 	if health <= 0:
 		death()
+		
+	var diff = max_health - health
+	if diff <= 1:
+		pass
+	elif diff >= 2:
+		pass
 
 ##############################################################
 # LIFECYCLE
@@ -70,21 +91,31 @@ func setBlockType(nType:blockType):
 		blockType.easy:
 			max_health = 1
 			score = 1
-			blockColor = Color.WHITE
+			blockColor = DIFFICULTY_COLORS.easy
 		
 		blockType.medium:
 			max_health = 2
 			score = 2
-			blockColor = Color.GREEN
+			blockColor = DIFFICULTY_COLORS.medium
 			
 		blockType.hard:
 			max_health = 3
 			score = 3
-			blockColor = Color.RED
-
+			blockColor = DIFFICULTY_COLORS.hard
+	print_debug(blockColor)
 
 func setColor(nColor:Color):
 	blockColor = nColor
+	queue_redraw()
+
+
+func setOutlineColor(nColor:Color):
+	outlineColor = nColor
+	queue_redraw()
+
+
+func setOutlineSize(nSize:float):
+	outlineSize = nSize
 	queue_redraw()
 
 
