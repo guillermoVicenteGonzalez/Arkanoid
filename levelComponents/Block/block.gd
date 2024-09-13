@@ -2,10 +2,10 @@
 
 class_name Block extends StaticBody2D
 
-signal blockDeath
+signal blockDeath(score:int)
 
 const BORDER_COLOR := Color.BLACK
-const BORDER_WIDTH := 0.5
+const BORDER_WIDTH := 0.33
 
 const DAMAGE_COLORS = {
 	healthy = Color.WHITE,
@@ -62,7 +62,7 @@ func _draw():
 
 func death():
 	# Particles
-	blockDeath.emit()
+	blockDeath.emit(score)
 	queue_free()
 
 
@@ -106,7 +106,6 @@ func setBlockType(nType:blockType):
 			max_health = 3
 			score = 3
 			blockColor = DIFFICULTY_COLORS.hard
-	print_debug(blockColor)
 
 func setColor(nColor:Color):
 	blockColor = nColor

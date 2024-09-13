@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://utm2fmxysab7"]
+[gd_scene load_steps=3 format=3 uid="uid://utm2fmxysab7"]
 
 [ext_resource type="Script" path="res://UI/HUD/hud.gd" id="1_6ogis"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_pfb7c"]
+font_size = 30
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="HUD" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_6ogis")
 
 [node name="Control" type="Control" parent="."]
@@ -24,5 +30,16 @@ anchor_right = 1.0
 offset_left = -1.0
 offset_bottom = 23.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 40
-text = "Score"
+theme_override_font_sizes/font_size = 0
+text = " Score: 0 "
+label_settings = SubResource("LabelSettings_pfb7c")
+
+[node name="ColorRect" type="ColorRect" parent="Control/scoreLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.235294)

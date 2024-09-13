@@ -100,6 +100,6 @@ func triangleShapedBlocks():
 
 	pass
 
-func addScore():
-	score += 1
+func addScore(scoreToAdd:int = 1):
+	score += scoreToAdd
 	hud.setScore(score)
