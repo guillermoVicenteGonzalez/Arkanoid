@@ -4,7 +4,6 @@
 
 [resource]
 script = ExtResource("1_d2lmg")
-size = 95
 speed = 200.0
 acc = 500.0
-friction = 300.0
+friction = 500.0

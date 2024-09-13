@@ -1,24 +1,47 @@
 class_name Level extends Node2D
 
-
+@export_category("level config")
+## Defines the size of the scenario
 @export var size := Vector2(1280, 800)
+## Defines how hard it is to break the blocks that will appear and how fast the ball will accelerate
+@export_range(1,10) var difficulty:float = 1 : set = setDifficulty
+
+@export_category("references")
+## A reference to a HUD object in the scene that will display various data.
 @export var hud:HUD
 
+## Used to accelerate the ball by multiplying its speed by this amount. It increases throughout the game
 var speed:float = 1
-var score:int = 0
+var score:int = 0 : set = setScore
 var _levelCenter:Vector2
+var _blockNumber:int = 0
+var _destroyedBlocks:int = 0
+
 
 @onready var player: Player = %player
+
+##############################################################
+# LIFECYCLE
+##############################################################
 
 func _ready() -> void:
 	_levelCenter = size / 2
 	initializeLevel()
+
+
+##############################################################
+# STATIC
+##############################################################
 
 static func instantiateLevel(levelSize:Vector2)-> Level:
 	var l := Level.new()
 	l.size = levelSize
 	return l
 
+
+##############################################################
+# ACTIONS
+##############################################################
 
 func initializeLevel():
 	# Set dimensions (camera)
@@ -45,6 +68,8 @@ func _checkLevelFinished():
 	# if it is 0 => _levelFinished()
 	pass
 
+
+## Instantiates the walls of the scene in their appropiate positions according to the stage's size
 func createWalls(levelSize:Vector2):
 	var wallSize = Vector2(1,levelSize.y)
 	var horizontalSize = Vector2(levelSize.x, 1)
@@ -66,21 +91,41 @@ func createWalls(levelSize:Vector2):
 	outOfBounds.size = horizontalSize
 
 
-func createBlock(difficulty:int, pos:Vector2):
+## Uses the difficulty rate to calculate how hard a block to instantiate should be
+func decideBlockType(diff:float):
+	var rate = randf_range(0,10)
+	
+	var easyThreshold = 6
+	var mediumTheshold = 9
+	
+	const mediumVarianceRate = .5
+	const hardVarianceRate = .4
+	
+	easyThreshold -= diff * mediumVarianceRate
+	mediumTheshold -= diff * hardVarianceRate
+	
+	if rate <= easyThreshold:
+		return  Block.blockType.easy
+	elif rate <= mediumTheshold:
+		return Block.blockType.medium
+	else:
+		return Block.blockType.hard
+
+
+## Instantiates a block taking into account its type according to the global difficulty
+func createBlock(diff:float, pos:Vector2):
 	var blockScene:PackedScene = load("res://levelComponents/Block/block.tscn")
 	var blockInstance:Block = blockScene.instantiate()
 	
-	var temp = randi_range(1,3)
-	if temp == 1: blockInstance.type = Block.blockType.easy
-	if temp == 2: blockInstance.type = Block.blockType.medium
-	if temp == 3: blockInstance.type = Block.blockType.hard
+	blockInstance.type =  decideBlockType(diff)
 	
 	blockInstance.global_position = pos
-	blockInstance.blockDeath.connect(addScore)
+	blockInstance.blockDeath.connect(onBlockDeath)
 	add_child(blockInstance)
 	pass
 
 
+## Instantiates blocks in an inverted triangle shape
 func triangleShapedBlocks():
 	var maxLength := size.x
 	var maxHeight := size.y / 2
@@ -90,7 +135,8 @@ func triangleShapedBlocks():
 	while blockPos.y < maxHeight:
 		
 		while blockPos.x < maxLength:
-			createBlock(1,blockPos)
+			createBlock(difficulty,blockPos)
+			_blockNumber += 1
 			blockPos.x += Block.DEFAULT_SIZE.x 
 			
 		blockPos.y += Block.DEFAULT_SIZE.y 
@@ -100,6 +146,40 @@ func triangleShapedBlocks():
 
 	pass
 
-func addScore(scoreToAdd:int = 1):
-	score += scoreToAdd
-	hud.setScore(score)
+##############################################################
+# GETTERS AND SETTERS
+##############################################################
+
+func setDifficulty(nDiff:float):
+	if nDiff <= 0:
+		difficulty = 0
+	elif nDiff >= 10:
+		difficulty = 10
+	else:
+		difficulty = nDiff
+
+func setScore(nScore:int):
+	score = nScore
+	if hud != null:
+		hud.setScore(score)
+		
+##############################################################
+# CALLBACKS
+##############################################################
+
+## Passed to instantiated block's death signal so score is added upon their death
+#func addScore(scoreToAdd:int = 1):
+	#score += scoreToAdd
+	#if hud != null:
+		#hud.setScore(score)
+		
+
+
+func onBlockDeath(bScore:int = 1):
+	setScore(score + bScore)
+	_destroyedBlocks += 1
+	
+	
+##############################################################
+# EVENTS
+##############################################################
