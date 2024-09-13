@@ -5,7 +5,6 @@ class_name Block extends StaticBody2D
 signal blockDeath(score:int)
 
 const BORDER_COLOR := Color.BLACK
-const BORDER_WIDTH := 0.33
 
 const DAMAGE_COLORS = {
 	healthy = Color.WHITE,
@@ -30,6 +29,7 @@ const DEFAULT_SIZE:Vector2 = Vector2(Constants.CELL_SIZE * 8, Constants.CELL_SIZ
 @export var size:Vector2 = DEFAULT_SIZE : set = setSize
 @export var type:blockType = blockType.easy : set = setBlockType
 @export_range(1,5) var outlineSize:float = 1 : set = setOutlineSize
+@export_range(0.1,1) var borderSize:float = 0 : set = setBorderSize
 
 var max_health:int = 1
 var health:int = 1
@@ -53,7 +53,7 @@ func _ready():
 func _draw():
 	draw_rect(Rect2(Vector2(0,0), size ),blockColor)
 	draw_rect(Rect2(Vector2 (outlineSize / 2, outlineSize / 2), size - Vector2(outlineSize, outlineSize)),outlineColor,false,outlineSize,false)
-	draw_rect(Rect2(Vector2 (BORDER_WIDTH / 2, BORDER_WIDTH / 2), size - Vector2(BORDER_WIDTH, BORDER_WIDTH)),BORDER_COLOR,false,BORDER_WIDTH,false)
+	draw_rect(Rect2(Vector2 (borderSize / 2, borderSize / 2), size - Vector2(borderSize, borderSize)),BORDER_COLOR,false,borderSize,false)
 
 
 ##############################################################
@@ -121,6 +121,9 @@ func setOutlineSize(nSize:float):
 	outlineSize = nSize
 	queue_redraw()
 
+func setBorderSize(nSize:float):
+	borderSize = nSize
+	queue_redraw()
 
 func setSize(nSize:Vector2):
 	size = nSize
