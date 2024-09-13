@@ -90,7 +90,6 @@ func _on_body_entered(body: Node) -> void:
 		direction *= -1
 
 	elif body is Wall:
-		print_debug("wall")
 		if body.bounceDirection == Wall.BounceDirection.VERTICAL:
 			direction *= -1
 		
