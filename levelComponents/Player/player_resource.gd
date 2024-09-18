@@ -1,6 +1,4 @@
-class_name PlayerResource
-
-extends Resource
+class_name PlayerResource extends Resource
 
 #@export var size:int = 10
 @export var speed:float = 350
