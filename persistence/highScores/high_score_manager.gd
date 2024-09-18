@@ -3,7 +3,7 @@ class_name HighScoreManager extends Node
 const FILE_PATH = "user://high_scores.tres"
 
 func _ready() -> void:
-	saveHighScore("guillermo",1)
+	saveHighScore("guillermo",4)
 	printHighScores()
 
 func createHighScoresResource() -> HighScores:
