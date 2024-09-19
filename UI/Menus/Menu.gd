@@ -1,5 +1,12 @@
 class_name Menu extends Control
 
+## The first element that should grab focus when getting shown
+@export var element_to_focus:Control = null
+
+func _ready():
+	_on_visibility_changed()
+	self.visibility_changed.connect(_on_visibility_changed)
+
 ## Meant to be connected with its parent. When connected will tipically run _on_child_menu_back()
 signal back(child_menu:Menu)
 
@@ -8,9 +15,13 @@ func _on_child_menu_back(child_menu:Menu):
 	child_menu.hide()
 	if self is Menu:
 		self.show()
-	pass
 
 ## hides the current menu and shows the menu to navigate to
 func _navigate_to(menu:Menu):
 	self.hide()
 	menu.show()
+
+func _on_visibility_changed():
+	if visible:
+		if element_to_focus != null:
+			element_to_focus.grab_focus()

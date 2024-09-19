@@ -21,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.454902)
 
-[node name="mainMenu" type="Control" parent="."]
+[node name="mainMenu" type="Control" parent="." node_paths=PackedStringArray("element_to_focus")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,18 +29,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hapwh")
+element_to_focus = NodePath("VBoxContainer/SettingsBtn")
 
-[node name="Label" type="Label" parent="mainMenu"]
+[node name="VBoxContainer" type="VBoxContainer" parent="mainMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="mainMenu/VBoxContainer"]
 layout_mode = 2
-offset_right = 1280.0
-offset_bottom = 23.0
 text = "Main Menu"
 
-[node name="SettingsBtn" type="Button" parent="mainMenu"]
+[node name="SettingsBtn" type="Button" parent="mainMenu/VBoxContainer"]
 layout_mode = 2
-offset_top = 27.0
-offset_right = 1280.0
-offset_bottom = 58.0
+text = "Settings"
+
+[node name="SettingsBtn2" type="Button" parent="mainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="SettingsBtn3" type="Button" parent="mainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="SettingsBtn4" type="Button" parent="mainMenu/VBoxContainer"]
+layout_mode = 2
 text = "Settings"
 
 [node name="SettingsMenu" parent="." instance=ExtResource("3_2vqju")]
@@ -48,5 +61,8 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[connection signal="button_down" from="mainMenu/SettingsBtn" to="mainMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="mainMenu/VBoxContainer/SettingsBtn" to="mainMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="mainMenu/VBoxContainer/SettingsBtn2" to="mainMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="mainMenu/VBoxContainer/SettingsBtn3" to="mainMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="mainMenu/VBoxContainer/SettingsBtn4" to="mainMenu" method="_on_settings_btn_button_down"]
 [connection signal="back" from="SettingsMenu" to="mainMenu" method="_on_settings_menu_back"]
