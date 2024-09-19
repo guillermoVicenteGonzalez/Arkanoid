@@ -25,3 +25,8 @@ func _on_visibility_changed():
 	if visible:
 		if element_to_focus != null:
 			element_to_focus.grab_focus()
+
+
+func load_packed_scene(s:PackedScene):
+	get_tree().change_scene_to_packed(s)
+	
