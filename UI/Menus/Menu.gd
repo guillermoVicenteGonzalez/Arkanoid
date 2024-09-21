@@ -1,5 +1,8 @@
 class_name Menu extends Control
 
+## Meant to be connected with its parent. When connected will tipically run _on_child_menu_back()
+signal back(child_menu:Menu)
+
 ## The first element that should grab focus when getting shown
 @export var element_to_focus:Control = null
 @export var main_menu_scene:PackedScene
@@ -7,9 +10,6 @@ class_name Menu extends Control
 func _ready():
 	_on_visibility_changed()
 	self.visibility_changed.connect(_on_visibility_changed)
-
-## Meant to be connected with its parent. When connected will tipically run _on_child_menu_back()
-signal back(child_menu:Menu)
 
 ## hides the menu passed as parameter and shows its parent
 func _on_child_menu_back(child_menu:Menu):
@@ -28,19 +28,19 @@ func _on_visibility_changed():
 			element_to_focus.grab_focus()
 
 
-func change_to_scene(scene_file_path:String, in_transition := "fadeToBlack", out_transition:String = "fadeFromBlack")->bool:
-	if scene_file_path == null:
+func change_to_scene(n_scene_path:String, in_transition := "fadeToBlack", out_transition:String = "fadeFromBlack")->bool:
+	if n_scene_path == null:
 		return false
 	
 	get_tree().paused = true
-	Engine.time_scale = 0
+	#Engine.time_scale = 0
 
 	await GlobalTransitions.play_transition(in_transition)
-	get_tree().change_scene_to_file(scene_file_path)
+	get_tree().change_scene_to_file(n_scene_path)
 	await GlobalTransitions.play_transition(out_transition)
 
 	get_tree().paused = false
-	Engine.time_scale = 1
+	#Engine.time_scale = 1
 	
 	return true
 
@@ -50,14 +50,14 @@ func change_to_packed_scene(n_scene:PackedScene, in_transition := "fadeToBlack",
 		return false
 	
 	get_tree().paused = true
-	Engine.time_scale = 0
+	#Engine.time_scale = 0
 
 	await GlobalTransitions.play_transition(in_transition)
 	get_tree().change_scene_to_packed(n_scene)
 	await GlobalTransitions.play_transition(out_transition)
 
 	get_tree().paused = false
-	Engine.time_scale = 1
+	#Engine.time_scale = 1
 	
 	return true
 	
@@ -65,5 +65,6 @@ func load_main_menu()->bool:
 	if main_menu_scene != null:
 		change_to_packed_scene(main_menu_scene)
 		return true
-		
+	
+	print_debug("Main menu scene is null")
 	return false

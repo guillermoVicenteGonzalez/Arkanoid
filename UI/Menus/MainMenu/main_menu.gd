@@ -11,4 +11,3 @@ func _on_settings_menu_back(menu:Menu) -> void:
 
 func _on_settings_btn_button_down() -> void:
 	_navigate_to(settings_menu)
-	pass # Replace with function body.

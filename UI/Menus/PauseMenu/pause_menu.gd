@@ -5,7 +5,7 @@ var paused:bool = false : set = set_paused
 func _ready() -> void:
 	toggle_menu(false)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		toggle_menu(!paused)
 
@@ -26,3 +26,9 @@ func set_paused(flag:bool):
 
 func resume_game():
 	toggle_menu(false)
+
+
+func _on_back_to_menu_btn_button_down() -> void:
+	print_debug("back to menu")
+	load_main_menu()
+	pass # Replace with function body.

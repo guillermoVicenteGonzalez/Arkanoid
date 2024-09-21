@@ -9,4 +9,5 @@ func _on_back_btn_button_down() -> void:
 
 
 func _on_load_level_btn_button_down() -> void:
-	load_packed_scene(level1)
+	#load_packed_scene(level1)
+	change_to_packed_scene(level1)

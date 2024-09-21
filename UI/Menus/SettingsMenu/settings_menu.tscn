@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://UI/Menus/SettingsMenu/settings_menu.gd" id="1_bvwuc"]
 
 [node name="SettingsMenu" type="Control" node_paths=PackedStringArray("element_to_focus")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
