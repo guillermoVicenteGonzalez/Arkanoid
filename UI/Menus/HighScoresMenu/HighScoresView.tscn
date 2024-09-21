@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqtt44267jc6g"]
+
+[ext_resource type="PackedScene" uid="uid://dc400vg5lqiyt" path="res://UI/Menus/MenuTemplate/menu_template.tscn" id="1_d3sif"]
+[ext_resource type="Script" path="res://UI/Menus/HighScoresMenu/highScoresMenu.gd" id="2_884es"]
+
+[node name="highScoresMenu" instance=ExtResource("1_d3sif")]
+script = ExtResource("2_884es")
+
+[node name="MarginContainer" parent="." index="0"]
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="VBoxContainer" parent="MarginContainer" index="0"]
+theme_override_constants/separation = 50
+
+[node name="titleLabel" parent="MarginContainer/VBoxContainer" index="0"]
+text = "High scores"
+
+[node name="scroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MenuContent" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="highScoresContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MenuContent/scroll" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10

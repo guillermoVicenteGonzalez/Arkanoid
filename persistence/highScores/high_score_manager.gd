@@ -12,28 +12,28 @@ func createHighScoresResource() -> HighScores:
 	else:
 		return hs
 
-func saveHighScore(playerName:String, score:int)->HighScores:
+func saveHighScore(playerName:String, score:int)->Array[HighScore]:
 	if ResourceLoader.exists(FILE_PATH):
 		var highScores:HighScores = ResourceLoader.load(FILE_PATH)
 		highScores.addHighScore(playerName,score)
 		var err = ResourceSaver.save(highScores, FILE_PATH)
 		if err:
 			print_debug("An error ocurred trying to save resource")
-			return null
+			return [null]
 			
-		return highScores
+		return highScores.getHighScores()
 	else:
 		print_debug("Resource didn't exist. Creating one")
 		var hs = createHighScoresResource()
-		if hs != null:
+		if hs != [null]:
 			hs.addHighScore(playerName, score)
 			var err = ResourceSaver.save(hs,FILE_PATH)
 			if err:
 				print_debug("An error ocurred trying to save resource")
-				return null
+				return [null]
 			return hs
 			
-		return null
+		return [null]
 
 func getHighScores()->Array[HighScore]:
 	if ResourceLoader.exists(FILE_PATH):
