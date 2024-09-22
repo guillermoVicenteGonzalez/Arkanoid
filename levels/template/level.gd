@@ -45,6 +45,14 @@ static func instantiateLevel(levelSize:Vector2)-> Level:
 # ACTIONS
 ##############################################################
 
+func game_over():
+	var saveHighScorePacked := load("res://UI/Menus/SaveHighScore/save_high_score.tscn")
+	var saveHighScoreScene:SaveHighScoreView = saveHighScorePacked.instantiate()
+	saveHighScoreScene.score = score
+	%HUD.add_child(saveHighScoreScene)
+	# Show game over screen
+
+
 func initializeLevel():
 	# Set dimensions (camera)
 	# Set player in the middle
@@ -81,6 +89,7 @@ func createWalls(levelSize:Vector2):
 	var topWall := Wall.instantiateWall(Vector2(0,-1))
 	topWall.bounceDirection = Wall.BounceDirection.VERTICAL
 	var outOfBounds := OutOfBounds.instantiateOutOfBounds(Vector2(0,levelSize.y -1))
+	outOfBounds.ballOut.connect(game_over)
 	
 	add_child(leftWall)
 	add_child(rightWall)

@@ -7,6 +7,7 @@
 script = ExtResource("2_c7kug")
 
 [node name="titleLabel" parent="MarginContainer/VBoxContainer" index="0"]
+unique_name_in_owner = true
 text = "Save high Score
 "
 
@@ -55,3 +56,4 @@ layout_mode = 2
 text = "Cancel"
 
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/MenuContent/VBoxContainer/playerName" to="." method="_on_player_name_text_changed"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/MenuContent/VBoxContainer/HBoxContainer/AcceptBtn" to="." method="saveScore"]

@@ -1,5 +1,7 @@
-extends Control
+extends Menu
 
+
+const MAIN_MENU_PATH = "res://UI/Menus/MainMenu/main_menu.tscn"
 @onready var high_scores_container: VBoxContainer = %highScoresContainer
 
 func _ready() -> void:
@@ -14,3 +16,6 @@ func _load_high_scores():
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_FILL
 		high_scores_container.add_child(label)
 		
+
+func backToMain():
+	change_to_scene(MAIN_MENU_PATH)

@@ -5,7 +5,7 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_h48pn"]
 bounce = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_slb1s"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_av8ox"]
 size = Vector2(0, 0)
 
 [node name="wall" type="StaticBody2D"]
@@ -16,4 +16,4 @@ script = ExtResource("1_4kngc")
 
 [node name="wallShape" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-shape = SubResource("RectangleShape2D_slb1s")
+shape = SubResource("RectangleShape2D_av8ox")

@@ -83,6 +83,11 @@ custom_minimum_size = Vector2(500, 50)
 layout_mode = 2
 text = "Settings"
 
+[node name="highScoresBtn" type="Button" parent="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "High Scores"
+
 [node name="QuitBtn" type="Button" parent="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 50)
@@ -96,5 +101,6 @@ layout_mode = 1
 
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/PlayBtn" to="root/mainMenu" method="_on_play_btn_button_down"]
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/SettingsBtn" to="root/mainMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/highScoresBtn" to="root/mainMenu" method="_on_high_scores_btn_button_down"]
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/QuitBtn" to="root/mainMenu" method="quit"]
 [connection signal="back" from="root/SettingsMenu" to="root/mainMenu" method="_on_settings_menu_back"]

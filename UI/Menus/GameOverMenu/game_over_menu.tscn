@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://c40adyylk4u6t"]
+
+[ext_resource type="PackedScene" uid="uid://dc400vg5lqiyt" path="res://UI/Menus/MenuTemplate/menu_template.tscn" id="1_ciia4"]
+
+[node name="gameOverMenu" instance=ExtResource("1_ciia4")]
+
+[node name="titleLabel" parent="MarginContainer/VBoxContainer" index="0"]
+text = "Game Over"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MenuContent" index="0"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/MenuContent/HBoxContainer" index="0"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Save high Score
+"
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/MenuContent/HBoxContainer" index="1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "Retry"
+
+[node name="Button3" type="Button" parent="MarginContainer/VBoxContainer/MenuContent/HBoxContainer" index="2"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+text = "back To Menu
+"
