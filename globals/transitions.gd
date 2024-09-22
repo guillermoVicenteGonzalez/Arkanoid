@@ -8,7 +8,7 @@ func play_transition(transition_name:String)->void:
 			print_debug("The transition animation does not exist")
 			return
 			
-	var transition_duration = transition_animation_player.get_animation(transition_name).length
+	var transition_duration = transition_animation_player.get_animation(transition_name).length * 3
 	get_tree().create_timer(transition_duration).timeout.connect(animation_timeout.bind(transition_name))
 	transition_animation_player.play(transition_name)
 	await transition_animation_player.animation_finished
@@ -16,7 +16,7 @@ func play_transition(transition_name:String)->void:
 
 
 func animation_timeout(anim_name:String):
-	if transition_animation_player.current_animation != anim_name:
+	if transition_animation_player.current_animation != anim_name || not transition_animation_player.is_playing():
 		return
 		
 	print_debug("timeout: Stopped waiting for animation " + anim_name)

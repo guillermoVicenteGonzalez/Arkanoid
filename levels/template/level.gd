@@ -25,8 +25,10 @@ var _destroyedBlocks:int = 0
 ##############################################################
 
 func _ready() -> void:
+	get_tree().paused = true
 	_levelCenter = size / 2
 	initializeLevel()
+	get_tree().paused = false
 
 
 ##############################################################

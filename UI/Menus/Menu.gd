@@ -5,7 +5,7 @@ signal back(child_menu:Menu)
 
 ## The first element that should grab focus when getting shown
 @export var element_to_focus:Control = null
-@export var main_menu_scene:PackedScene
+
 
 func _ready():
 	_on_visibility_changed()
@@ -61,13 +61,6 @@ func change_to_packed_scene(n_scene:PackedScene, in_transition := "fadeToBlack",
 	
 	return true
 	
-func load_main_menu()->bool:
-	if main_menu_scene != null:
-		change_to_packed_scene(main_menu_scene)
-		return true
-	
-	print_debug("Main menu scene is null")
-	return false
 
 
 func quit():
