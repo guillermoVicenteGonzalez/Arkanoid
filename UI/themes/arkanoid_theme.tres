@@ -7,3 +7,4 @@ MarginContainer/constants/margin_bottom = 50
 MarginContainer/constants/margin_left = 50
 MarginContainer/constants/margin_right = 50
 MarginContainer/constants/margin_top = 50
+VBoxContainer/constants/separation = 20

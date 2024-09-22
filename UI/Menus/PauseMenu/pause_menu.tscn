@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bfxxohlqmgev7" path="res://UI/Menus/MainMenu/main_menu.tscn" id="3_i03tw"]
 
 [node name="pauseMenu" node_paths=PackedStringArray("element_to_focus") instance=ExtResource("1_jff53")]
-process_mode = 3
 script = ExtResource("2_ns50r")
 element_to_focus = NodePath("MarginContainer/VBoxContainer/MenuContent/VBoxContainer/resumeBtn")
 main_menu_scene = ExtResource("3_i03tw")

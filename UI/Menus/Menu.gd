@@ -68,3 +68,7 @@ func load_main_menu()->bool:
 	
 	print_debug("Main menu scene is null")
 	return false
+
+
+func quit():
+	get_tree().quit()
