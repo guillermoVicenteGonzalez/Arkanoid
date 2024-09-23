@@ -14,6 +14,7 @@ signal gameFinished(state:gameState)
 @export var size := Vector2(1280, 800)
 ## Defines how hard it is to break the blocks that will appear and how fast the ball will accelerate
 @export_range(1,10) var difficulty:float = 1 : set = setDifficulty
+@export_range(1.1,5) var acceleration_rate:float 
 ## Defines if the limit is timed
 @export var timed:bool = false 
 @export var time_limit:float = 10
@@ -31,6 +32,7 @@ var _destroyedBlocks:int = 0
 
 
 @onready var player: Player = %player
+@onready var ball: Ball = %Ball
 
 ##############################################################
 # LIFECYCLE
@@ -141,6 +143,11 @@ func triangleShapedBlocks():
 		iterationCount += 1
 
 
+func accelerate():
+	if ball != null:
+		ball.setSpeed(ball.speed * acceleration_rate)
+
+
 ##############################################################
 # UTILS
 ##############################################################
@@ -199,7 +206,8 @@ func setScore(nScore:int):
 	score = nScore
 	if hud != null:
 		hud.setScore(score)
-		
+
+	
 ##############################################################
 # CALLBACKS
 ##############################################################
@@ -217,6 +225,10 @@ func onBlockDeath(bScore:int = 1):
 	_destroyedBlocks += 1
 	if _destroyedBlocks == _blockNumber:
 		gameFinished.emit(gameState.VICTORY)
+		
+	if _destroyedBlocks % 10 == 0:
+		print_debug("accelerating")
+		accelerate()
 		
 	
 func on_timeout():

@@ -8,8 +8,7 @@
 
 [node name="levelTemplate" type="Node2D" node_paths=PackedStringArray("hud")]
 script = ExtResource("1_y4mds")
-difficulty = 10.0
-timed = true
+acceleration_rate = 1.221
 hud = NodePath("HUD")
 
 [node name="player" parent="." instance=ExtResource("1_r67a2")]
@@ -17,6 +16,7 @@ unique_name_in_owner = true
 position = Vector2(644, 764)
 
 [node name="Ball" parent="." instance=ExtResource("3_pjott")]
+unique_name_in_owner = true
 position = Vector2(649, 662)
 physics_material_override = null
 linear_velocity = Vector2(0, 300)
