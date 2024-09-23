@@ -6,6 +6,8 @@
 size = Vector2(0, 0)
 
 [node name="OutOfBounds" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_x4omp")
 
 [node name="OFBShape" type="CollisionShape2D" parent="."]

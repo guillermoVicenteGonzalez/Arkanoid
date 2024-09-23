@@ -11,12 +11,15 @@ config_version=5
 [application]
 
 config/name="Arkanoid"
+run/main_scene="res://UI/Menus/MainMenu/main_menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 CONSTANTS="*res://globals/CONSTANTS.gd"
+HighScoreManagerScene="*res://persistence/highScores/high_score_manager_scene.tscn"
+GlobalTransitions="*res://globals/transitions.tscn"
 
 [display]
 

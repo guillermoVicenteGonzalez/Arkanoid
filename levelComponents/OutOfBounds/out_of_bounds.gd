@@ -26,6 +26,7 @@ func setSize(nSize:Vector2):
 
 
 func _on_body_entered(body: Node2D) -> void:
+	print_debug(body)
 	if body is Ball:
 		await body.death()
 		ballOut.emit()

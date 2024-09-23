@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dq3mh3phbxall"]
+
+[ext_resource type="Script" path="res://persistence/highScores/high_score_manager.gd" id="1_11qq6"]
+
+[node name="highScoreManagerScene" type="Node"]
+script = ExtResource("1_11qq6")

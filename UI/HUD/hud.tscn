@@ -21,20 +21,25 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="scoreLabel" type="Label" parent="Control"]
-unique_name_in_owner = true
+[node name="HBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -1.0
-offset_bottom = 23.0
+offset_left = -161.0
+offset_bottom = 88.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 0
-text = " Score: 0 "
-label_settings = SubResource("LabelSettings_pfb7c")
 
-[node name="ColorRect" type="ColorRect" parent="Control/scoreLabel"]
+[node name="timeLabel" type="Label" parent="Control/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 0
+text = "Time left: 0"
+label_settings = SubResource("LabelSettings_pfb7c")
+uppercase = true
+
+[node name="ColorRect" type="ColorRect" parent="Control/HBoxContainer/timeLabel"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -42,4 +47,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.235294)
+color = Color(0, 0, 0, 0.764706)
+
+[node name="scoreLabel" type="Label" parent="Control/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 0
+text = " Score: 0 "
+label_settings = SubResource("LabelSettings_pfb7c")
+uppercase = true
+
+[node name="ColorRect" type="ColorRect" parent="Control/HBoxContainer/scoreLabel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.764706)

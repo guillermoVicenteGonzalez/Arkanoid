@@ -9,7 +9,6 @@
 [node name="levelTemplate" type="Node2D" node_paths=PackedStringArray("hud")]
 script = ExtResource("1_y4mds")
 difficulty = 10.0
-timed = true
 hud = NodePath("HUD")
 
 [node name="player" parent="." instance=ExtResource("1_r67a2")]
@@ -29,5 +28,3 @@ layer = 3
 
 [node name="HUD" parent="." instance=ExtResource("5_iqo4x")]
 unique_name_in_owner = true
-
-[connection signal="gameFinished" from="." to="." method="_on_game_finished"]

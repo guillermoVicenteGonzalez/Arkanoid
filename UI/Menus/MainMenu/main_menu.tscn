@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfxxohlqmgev7"]
+
+[ext_resource type="Script" path="res://UI/Menus/MainMenu/main_menu.gd" id="1_hapwh"]
+[ext_resource type="Theme" uid="uid://df7kwgbt1u3iw" path="res://UI/themes/arkanoid_theme.tres" id="1_l2lj2"]
+[ext_resource type="PackedScene" uid="uid://88knte4bfrke" path="res://UI/Menus/SettingsMenu/settings_menu.tscn" id="3_2vqju"]
+
+[node name="mainMenuContainer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.454902)
+
+[node name="root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l2lj2")
+
+[node name="mainMenu" type="Control" parent="root" node_paths=PackedStringArray("element_to_focus")]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hapwh")
+element_to_focus = NodePath("MarginContainer/VBoxContainer/MenuContent/VBoxContainer/PlayBtn")
+
+[node name="MarginContainer" type="MarginContainer" parent="root/mainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="root/mainMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="titleLabel" type="Label" parent="root/mainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 80
+text = "Arkanoid (clone)"
+horizontal_alignment = 1
+
+[node name="MenuContent" type="Control" parent="root/mainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="root/mainMenu/MarginContainer/VBoxContainer/MenuContent"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -16.0
+offset_right = 4.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayBtn" type="Button" parent="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+text = "Play
+"
+
+[node name="SettingsBtn" type="Button" parent="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+text = "Settings"
+
+[node name="highScoresBtn" type="Button" parent="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "High Scores"
+
+[node name="QuitBtn" type="Button" parent="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 2
+text = "Quit"
+
+[node name="SettingsMenu" parent="root" instance=ExtResource("3_2vqju")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/PlayBtn" to="root/mainMenu" method="_on_play_btn_button_down"]
+[connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/SettingsBtn" to="root/mainMenu" method="_on_settings_btn_button_down"]
+[connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/highScoresBtn" to="root/mainMenu" method="_on_high_scores_btn_button_down"]
+[connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/QuitBtn" to="root/mainMenu" method="quit"]
+[connection signal="back" from="root/SettingsMenu" to="root/mainMenu" method="_on_settings_menu_back"]
