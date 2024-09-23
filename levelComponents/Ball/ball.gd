@@ -2,6 +2,8 @@
 
 class_name Ball extends RigidBody2D
 
+const OG_SPEED = 350
+
 # Export variables
 @export var sphereColor:Color = Color.WHITE : set = setColor
 @export var speed:float = 350 : set = setSpeed
