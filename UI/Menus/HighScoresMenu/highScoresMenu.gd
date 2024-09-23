@@ -1,7 +1,5 @@
 extends Menu
 
-
-const MAIN_MENU_PATH = "res://UI/Menus/MainMenu/main_menu.tscn"
 @onready var high_scores_container: VBoxContainer = %highScoresContainer
 
 func _ready() -> void:

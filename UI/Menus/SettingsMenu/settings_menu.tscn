@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://UI/Menus/SettingsMenu/settings_menu.gd" id="1_bvwuc"]
 [ext_resource type="Theme" uid="uid://df7kwgbt1u3iw" path="res://UI/themes/arkanoid_theme.tres" id="1_gafal"]
 
-[node name="SettingsMenu" type="Control"]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("element_to_focus")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -13,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_gafal")
 script = ExtResource("1_bvwuc")
+element_to_focus = NodePath("MarginContainer/VBoxContainer/MenuContent/VBoxContainer/HBoxContainer/HSlider")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1

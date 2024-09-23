@@ -3,8 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://dc400vg5lqiyt" path="res://UI/Menus/MenuTemplate/menu_template.tscn" id="1_d3sif"]
 [ext_resource type="Script" path="res://UI/Menus/HighScoresMenu/highScoresMenu.gd" id="2_884es"]
 
-[node name="highScoresMenu" instance=ExtResource("1_d3sif")]
+[node name="highScoresMenu" node_paths=PackedStringArray("element_to_focus") instance=ExtResource("1_d3sif")]
 script = ExtResource("2_884es")
+element_to_focus = NodePath("MarginContainer/VBoxContainer/MenuContent/VBoxContainer/backToMainBtn")
 
 [node name="MarginContainer" parent="." index="0"]
 theme_override_constants/margin_left = 200

@@ -1,4 +1,9 @@
+
+
 class_name Menu extends Control
+
+const MAIN_MENU_PATH = "res://UI/Menus/MainMenu/main_menu.tscn"
+
 
 ## Meant to be connected with its parent. When connected will tipically run _on_child_menu_back()
 signal back(child_menu:Menu)

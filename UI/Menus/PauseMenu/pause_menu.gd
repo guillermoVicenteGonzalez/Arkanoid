@@ -1,7 +1,6 @@
 class_name PauseMenu extends Menu
 
 var paused:bool = false : set = set_paused
-const MAIN_MENU_PATH = "res://UI/Menus/MainMenu/main_menu.tscn"
 
 func _ready() -> void:
 	toggle_menu(false)
@@ -30,8 +29,4 @@ func resume_game():
 
 
 func _on_back_to_menu_btn_button_down() -> void:
-	var mainMenu:PackedScene = load(MAIN_MENU_PATH)
-	if mainMenu != null:
-		#get_tree().change_scene_to_packed(mainMenu)
-		change_to_packed_scene(mainMenu)
-		
+	change_to_scene(Routes.routes.main_menu)

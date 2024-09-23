@@ -24,7 +24,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_l2lj2")
 
-[node name="mainMenu" type="Control" parent="root"]
+[node name="mainMenu" type="Control" parent="root" node_paths=PackedStringArray("element_to_focus")]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -33,6 +33,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hapwh")
+element_to_focus = NodePath("MarginContainer/VBoxContainer/MenuContent/VBoxContainer/PlayBtn")
 
 [node name="MarginContainer" type="MarginContainer" parent="root/mainMenu"]
 layout_mode = 1

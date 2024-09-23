@@ -1,5 +1,6 @@
 class_name SaveHighScoreView extends Menu
 
+
 var high_scores_view:PackedScene = preload("res://UI/Menus/HighScoresMenu/HighScoresView.tscn")
 var score:int = 0: set = setScore
 var playerName:String = ""
@@ -32,3 +33,11 @@ func _on_player_name_text_changed(new_text: String) -> void:
 func set_game_over_flag(n_flag:bool):
 	game_over_flag = n_flag
 	%titleLabel.text = "Game Over"
+
+
+func _on_cancel_btn_button_down() -> void:
+	change_to_scene(Routes.routes.main_menu)
+
+
+func _on_retry_btn_button_down() -> void:
+	change_to_scene(Routes.routes.first_level)
