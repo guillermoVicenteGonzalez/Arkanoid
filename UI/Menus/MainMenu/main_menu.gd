@@ -11,7 +11,6 @@ var highScoresScene:PackedScene = preload("res://UI/Menus/HighScoresMenu/HighSco
 
 
 func _on_settings_menu_back(menu:Menu) -> void:
-	print_debug(menu)
 	_on_child_menu_back(menu)
 
 
@@ -27,3 +26,7 @@ func _on_play_btn_button_down() -> void:
 func _on_high_scores_btn_button_down() -> void:
 	change_to_packed_scene(highScoresScene)
 	pass # Replace with function body.
+
+
+func _on_level_select_back(child_menu: Menu) -> void:
+	_on_child_menu_back(child_menu)

@@ -111,3 +111,4 @@ layout_mode = 1
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/highScoresBtn" to="root/mainMenu" method="_on_high_scores_btn_button_down"]
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/QuitBtn" to="root/mainMenu" method="quit"]
 [connection signal="back" from="root/SettingsMenu" to="root/mainMenu" method="_on_settings_menu_back"]
+[connection signal="back" from="root/levelSelect" to="root/mainMenu" method="_on_level_select_back"]
