@@ -7,6 +7,7 @@ class_name MainMenu extends Menu
 var highScoresScene:PackedScene = preload("res://UI/Menus/HighScoresMenu/HighScoresView.tscn")
 
 @onready var settings_menu: SettingsMenu = %SettingsMenu
+@onready var level_select: LevelSelectView = %levelSelect
 
 
 func _on_settings_menu_back(menu:Menu) -> void:
@@ -19,7 +20,7 @@ func _on_settings_btn_button_down() -> void:
 
 
 func _on_play_btn_button_down() -> void:
-	change_to_packed_scene(first_level)
+	_navigate_to(level_select)
 
 
 
