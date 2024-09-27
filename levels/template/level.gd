@@ -74,7 +74,6 @@ func victory():
 	var saveHighScorePacked := load("res://UI/Menus/SaveHighScore/save_high_score.tscn")
 	var saveHighScoreScene:SaveHighScoreView = saveHighScorePacked.instantiate()
 	saveHighScoreScene.score = score
-	saveHighScoreScene.title
 	%HUD.add_child(saveHighScoreScene)
 
 func initializeLevel():
