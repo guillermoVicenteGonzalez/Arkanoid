@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://co1n6wh7shscq"]
+[gd_scene load_steps=6 format=3 uid="uid://co1n6wh7shscq"]
 
 [ext_resource type="Script" path="res://levelComponents/Ball/ball.gd" id="1_vc2e2"]
+[ext_resource type="AudioStream" uid="uid://dkwjtxjd5wxos" path="res://sounds/assets/ball_hit2.wav" id="2_f8ko7"]
+[ext_resource type="AudioStream" uid="uid://hfgxmoge824" path="res://sounds/assets/player-ball-hit.wav" id="3_pmbiu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hei8f"]
 bounce = 1.0
@@ -20,6 +22,9 @@ script = ExtResource("1_vc2e2")
 sphereColor = Color(0.823529, 1, 1, 1)
 speed = 300.0
 radius = 9.295
+block_hit_sound = ExtResource("2_f8ko7")
+player_hit_sound = ExtResource("3_pmbiu")
+wall_hit_sound = ExtResource("2_f8ko7")
 
 [node name="ballCollision" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -32,6 +37,9 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_lrlcq")
 debug_color = Color(0.965672, 0, 0.485265, 0.42)
+
+[node name="ballAudioPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="ballArea" to="." method="_on_ball_area_body_entered"]

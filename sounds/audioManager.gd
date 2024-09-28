@@ -18,7 +18,7 @@ func set_bus_volume(b_name:String, n_vol:float)->bool:
 	bus_changed.emit(b_name)
 	return true
 
-func get_bus_volume(b_name)->int:
+func get_bus_volume(b_name)->float:
 	var b_idx := AudioServer.get_bus_index(b_name)
 	if b_idx == -1: 
 		print_debug("Error retrieving bus index: The bus does not exist")

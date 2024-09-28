@@ -2,6 +2,8 @@ class_name PauseMenu extends Menu
 
 var paused:bool = false : set = set_paused
 
+@onready var settings_menu: SettingsMenu = %SettingsMenu
+
 func _ready() -> void:
 	toggle_menu(false)
 
@@ -30,3 +32,11 @@ func resume_game():
 
 func _on_back_to_menu_btn_button_down() -> void:
 	change_to_scene(Routes.routes.main_menu)
+
+
+func _on_options_btn_button_down() -> void:
+	_navigate_to(settings_menu)
+
+
+func _on_settings_menu_back(child_menu: Menu) -> void:
+	_on_child_menu_back(child_menu)

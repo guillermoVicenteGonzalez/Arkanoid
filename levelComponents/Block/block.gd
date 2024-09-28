@@ -48,7 +48,7 @@ func _ready():
 	#var deleteThis := Vector2()
 	size = size
 	health = max_health
-
+	
 
 func _draw():
 	draw_rect(Rect2(Vector2(0,0), size ),blockColor)
