@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfxxohlqmgev7"]
+[gd_scene load_steps=5 format=3 uid="uid://bfxxohlqmgev7"]
 
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/main_menu.gd" id="1_hapwh"]
 [ext_resource type="Theme" uid="uid://df7kwgbt1u3iw" path="res://UI/themes/arkanoid_theme.tres" id="1_l2lj2"]
 [ext_resource type="PackedScene" uid="uid://88knte4bfrke" path="res://UI/Menus/SettingsMenu/settings_menu.tscn" id="3_2vqju"]
+[ext_resource type="PackedScene" uid="uid://dafh4nmddbyt7" path="res://UI/Menus/level select/level_select.tscn" id="4_4dqu7"]
 
 [node name="mainMenuContainer" type="CanvasLayer"]
 
@@ -100,8 +101,14 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
+[node name="levelSelect" parent="root" instance=ExtResource("4_4dqu7")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/PlayBtn" to="root/mainMenu" method="_on_play_btn_button_down"]
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/SettingsBtn" to="root/mainMenu" method="_on_settings_btn_button_down"]
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/highScoresBtn" to="root/mainMenu" method="_on_high_scores_btn_button_down"]
 [connection signal="button_down" from="root/mainMenu/MarginContainer/VBoxContainer/MenuContent/VBoxContainer/QuitBtn" to="root/mainMenu" method="quit"]
 [connection signal="back" from="root/SettingsMenu" to="root/mainMenu" method="_on_settings_menu_back"]
+[connection signal="back" from="root/levelSelect" to="root/mainMenu" method="_on_level_select_back"]

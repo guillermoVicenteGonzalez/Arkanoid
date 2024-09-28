@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="LevelRouter" load_steps=6 format=3 uid="uid://c2wdmwhojdw55"]
+
+[ext_resource type="Script" path="res://levels/levelRoute.gd" id="1_jr4o8"]
+[ext_resource type="PackedScene" uid="uid://nm7btqj3cjum" path="res://levels/template/level_template.tscn" id="2_nvn70"]
+[ext_resource type="Script" path="res://levels/levelRouter.gd" id="2_yn5yb"]
+
+[sub_resource type="Resource" id="Resource_20r6h"]
+script = ExtResource("1_jr4o8")
+level_name = "Level 1"
+level_path = ExtResource("2_nvn70")
+
+[sub_resource type="Resource" id="Resource_6cwen"]
+script = ExtResource("1_jr4o8")
+level_name = "level 2"
+level_path = ExtResource("2_nvn70")
+
+[resource]
+script = ExtResource("2_yn5yb")
+levels = Array[ExtResource("1_jr4o8")]([SubResource("Resource_20r6h"), SubResource("Resource_6cwen")])

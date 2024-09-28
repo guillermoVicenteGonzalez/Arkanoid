@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 CONSTANTS="*res://globals/CONSTANTS.gd"
 HighScoreManagerScene="*res://persistence/highScores/high_score_manager_scene.tscn"
 GlobalTransitions="*res://globals/transitions.tscn"
+AUDIO_MANAGER="*res://sounds/audioManager.gd"
 
 [display]
 

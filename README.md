@@ -27,12 +27,12 @@ Arkanoid clone to practice godot
 - [ ] UI
 
   - [x] Transitions
-  - [ ] Main menu
-    - [ ] Level selection
+  - [x] Main menu
+    - [x] Level selection
     - [ ] Settings
       - [ ] Sound settings
     - [x] High scores
-      - [ ] High score persistence
+      - [x] High score persistence
     - [x] Quit
 
 - [ ] Other feature

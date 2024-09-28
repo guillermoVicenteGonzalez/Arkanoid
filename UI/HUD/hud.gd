@@ -11,7 +11,7 @@ func ready():
 	setScore(score)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if _timer:
 		set_time_left(_timer.time_left)
 

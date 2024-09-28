@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dafh4nmddbyt7"]
+
+[ext_resource type="PackedScene" uid="uid://dc400vg5lqiyt" path="res://UI/Menus/MenuTemplate/menu_template.tscn" id="1_f2i6g"]
+[ext_resource type="Script" path="res://UI/Menus/level select/level_select.gd" id="2_odlld"]
+[ext_resource type="Resource" uid="uid://c2wdmwhojdw55" path="res://levels/Levels.tres" id="3_qeoy2"]
+
+[node name="levelSelect" instance=ExtResource("1_f2i6g")]
+script = ExtResource("2_odlld")
+level_router = ExtResource("3_qeoy2")
+
+[node name="titleLabel" parent="MarginContainer/VBoxContainer" index="0"]
+text = "Level Select"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MenuContent" index="0"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/MenuContent/VBoxContainer" index="0"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MenuContent/VBoxContainer/ScrollContainer" index="0"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="backBtn" type="Button" parent="MarginContainer/VBoxContainer/MenuContent/VBoxContainer" index="1"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
