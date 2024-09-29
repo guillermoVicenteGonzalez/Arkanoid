@@ -9,31 +9,31 @@ Arkanoid clone to practice godot
   - [x] Player
   - [x] Ball
   - [x] Walls
-    - Three difficulties. Difficulty == more hits to destroy
+	- Three difficulties. Difficulty == more hits to destroy
   - [x] "Goal"
   - [x] Level
-    - [x] Level settings
-      - [x] Difficulty
-        - Depending on the difficulty more blocks of a higher level will appear
-      - [x] Acceleration rate
-        - The ball accelerates over time. the rate defines how much it will accelerate each time
-      - [x] Size / nº of blocks
-      - [x] Time limit
-        - If the time limit is over => game finishes
-    - [x] HUD
-      - [x] score
-      - [x] timer
+	- [x] Level settings
+	  - [x] Difficulty
+		- Depending on the difficulty more blocks of a higher level will appear
+	  - [x] Acceleration rate
+		- The ball accelerates over time. the rate defines how much it will accelerate each time
+	  - [x] Size / nº of blocks
+	  - [x] Time limit
+		- If the time limit is over => game finishes
+	- [x] HUD
+	  - [x] score
+	  - [x] timer
 
 - [x] UI
   
   - [x] Transitions
   - [x] Main menu
-    - [x] Level selection
-    - [x] Settings
-      - [x] Sound settings
-    - [x] High scores
-      - [x] High score persistence
-    - [x] Quit
+	- [x] Level selection
+	- [x] Settings
+	  - [x] Sound settings
+	- [x] High scores
+	  - [x] High score persistence
+	- [x] Quit
 
 - [ ] Other feature
   
@@ -58,23 +58,23 @@ Now, we use the difficulty parameter to tweak those threshold, each one of them 
 
 ```gdscript
 func decideBlockType(diff:float):
-    var rate = randf_range(0,10)
+	var rate = randf_range(0,10)
 
-    var easyThreshold = 6
-    var mediumTheshold = 9
+	var easyThreshold = 6
+	var mediumTheshold = 9
 
-    const mediumVarianceRate = .5
-    const hardVarianceRate = .4
+	const mediumVarianceRate = .5
+	const hardVarianceRate = .4
 
-    easyThreshold -= diff * mediumVarianceRate
-    mediumTheshold -= diff * hardVarianceRate
+	easyThreshold -= diff * mediumVarianceRate
+	mediumTheshold -= diff * hardVarianceRate
 
-    if rate <= easyThreshold:
-        return  Block.blockType.easy
-    elif rate <= mediumTheshold:
-        return Block.blockType.medium
-    else:
-        return Block.blockType.hard
+	if rate <= easyThreshold:
+		return  Block.blockType.easy
+	elif rate <= mediumTheshold:
+		return Block.blockType.medium
+	else:
+		return Block.blockType.hard
 ```
 
 ### High scores persistence
@@ -90,11 +90,11 @@ class_name HighScore extends Resource
 @export var score:int
 
 func _init(n:String = "", s:int = 0) -> void:
-    playerName = n
-    score = s
+	playerName = n
+	score = s
 
 func printHighScore():
-    print("player name: " + playerName + " score: " + str(score))
+	print("player name: " + playerName + " score: " + str(score))
 ```
 
 Now we create the resource that will be saved, the `HighScores` resource. This resource will contain an array of exactly 10 highScores and will sort them each time a new one is added.
@@ -109,29 +109,29 @@ const MAX_SIZE = 10
 @export var _highScores:Array[HighScore] = []
 
 func addHighScore(name:String, score:int)->HighScore:
-    var hs = HighScore.new(name,score)
-    _highScores.append(hs)
-    sortHighScores()
-    if _highScores.size() > MAX_SIZE:
-        print_debug("entro")
-        _highScores = _highScores.slice(0,MAX_SIZE)
-    return hs
+	var hs = HighScore.new(name,score)
+	_highScores.append(hs)
+	sortHighScores()
+	if _highScores.size() > MAX_SIZE:
+		print_debug("entro")
+		_highScores = _highScores.slice(0,MAX_SIZE)
+	return hs
 
 func getHighScores() -> Array[HighScore]:
-    return _highScores
+	return _highScores
 
 
 func clearHighScores() -> void:
-    _highScores = []
-    print_debug(_highScores)
+	_highScores = []
+	print_debug(_highScores)
 
 func sortHighScores()->void:
-    _highScores.sort_custom(func(a:HighScore,b:HighScore):
-        if a.score > b.score:
-            return true
-        return false
-    )
-    pass
+	_highScores.sort_custom(func(a:HighScore,b:HighScore):
+		if a.score > b.score:
+			return true
+		return false
+	)
+	pass
 ```
 
 The last step is to be able to save and read from disk a resource of this type so that high scores persist between runs.
@@ -144,55 +144,55 @@ class_name HighScoreManager extends Node
 const FILE_PATH = "user://high_scores.tres"
 
 func createHighScoresResource() -> HighScores:
-    var hs:HighScores = HighScores.new()
-    var err = ResourceSaver.save(hs,FILE_PATH)
-    if err:
-        print_debug("Error creating new resource")
-        return null
+	var hs:HighScores = HighScores.new()
+	var err = ResourceSaver.save(hs,FILE_PATH)
+	if err:
+		print_debug("Error creating new resource")
+		return null
 
-    else:
-        return hs
+	else:
+		return hs
 
 func saveHighScore(playerName:String, score:int)->Array[HighScore]:
-    if ResourceLoader.exists(FILE_PATH):
-        var highScores:HighScores = ResourceLoader.load(FILE_PATH)
-        highScores.addHighScore(playerName,score)
-        var err = ResourceSaver.save(highScores, FILE_PATH)
-        if err:
-            print_debug("An error ocurred trying to save resource")
-            return [null]
+	if ResourceLoader.exists(FILE_PATH):
+		var highScores:HighScores = ResourceLoader.load(FILE_PATH)
+		highScores.addHighScore(playerName,score)
+		var err = ResourceSaver.save(highScores, FILE_PATH)
+		if err:
+			print_debug("An error ocurred trying to save resource")
+			return [null]
 
-        return highScores.getHighScores()
-    else:
-        print_debug("Resource didn't exist. Creating one")
-        var hs = createHighScoresResource()
-        if hs != [null]:
-            hs.addHighScore(playerName, score)
-            var err = ResourceSaver.save(hs,FILE_PATH)
-            if err:
-                print_debug("An error ocurred trying to save resource")
-                return [null]
-            return hs
+		return highScores.getHighScores()
+	else:
+		print_debug("Resource didn't exist. Creating one")
+		var hs = createHighScoresResource()
+		if hs != [null]:
+			hs.addHighScore(playerName, score)
+			var err = ResourceSaver.save(hs,FILE_PATH)
+			if err:
+				print_debug("An error ocurred trying to save resource")
+				return [null]
+			return hs
 
-        return [null]
+		return [null]
 
 func getHighScores()->Array[HighScore]:
-    if ResourceLoader.exists(FILE_PATH):
-        var highScores:HighScores = ResourceLoader.load(FILE_PATH)
-        return highScores.getHighScores()
-    else:
-        print_debug("There are no highScores")
-        return []
+	if ResourceLoader.exists(FILE_PATH):
+		var highScores:HighScores = ResourceLoader.load(FILE_PATH)
+		return highScores.getHighScores()
+	else:
+		print_debug("There are no highScores")
+		return []
 
 
 func clearHighScores()->bool:
-    var hs:HighScores = ResourceLoader.load(FILE_PATH)
-    hs.clearHighScores()
-    var err = ResourceSaver.save(hs,FILE_PATH)
-    if err == null:
-        print_debug("Error cleaning high scores")
-        return false
-    return true
+	var hs:HighScores = ResourceLoader.load(FILE_PATH)
+	hs.clearHighScores()
+	var err = ResourceSaver.save(hs,FILE_PATH)
+	if err == null:
+		print_debug("Error cleaning high scores")
+		return false
+	return true
 ```
 
 It uses `ResourceSaver` and `ResourceLoader` as a means to load and store this resource persistently in the `FILE_PATH` route.
@@ -212,49 +212,49 @@ const CONFIG_FILE_PATH = "user://settings.cfg"
 const SECTION_NAME = "Sound"
 
 func _ready() -> void:
-    load_volume_settings()
+	load_volume_settings()
 
 func set_bus_volume(b_name:String, n_vol:float)->bool:
-    var b_idx := AudioServer.get_bus_index(b_name)
-    if b_idx == -1: 
-        print_debug("Error retrieving bus index: The bus does not exist")
-        return false
-    #AudioServer.set_bus_volume_db(3)
-    AudioServer.set_bus_volume_db(b_idx,linear_to_db(n_vol))
-    bus_changed.emit(b_name)
-    return true
+	var b_idx := AudioServer.get_bus_index(b_name)
+	if b_idx == -1: 
+		print_debug("Error retrieving bus index: The bus does not exist")
+		return false
+	#AudioServer.set_bus_volume_db(3)
+	AudioServer.set_bus_volume_db(b_idx,linear_to_db(n_vol))
+	bus_changed.emit(b_name)
+	return true
 
 func get_bus_volume(b_name)->float:
-    var b_idx := AudioServer.get_bus_index(b_name)
-    if b_idx == -1: 
-        print_debug("Error retrieving bus index: The bus does not exist")
-        return false
-    var volume := AudioServer.get_bus_volume_db(b_idx)
-    return db_to_linear(volume)
+	var b_idx := AudioServer.get_bus_index(b_name)
+	if b_idx == -1: 
+		print_debug("Error retrieving bus index: The bus does not exist")
+		return false
+	var volume := AudioServer.get_bus_volume_db(b_idx)
+	return db_to_linear(volume)
 
 
 func save_volume_settings():
-    var config := ConfigFile.new()
-    for b_idx in AudioServer.bus_count:
-        var b_name := AudioServer.get_bus_name(b_idx)
-        var b_volume := get_bus_volume(b_name)
-        config.set_value(SECTION_NAME,b_name,b_volume)
-    var err := config.save(CONFIG_FILE_PATH)
-    if err:
-        print_debug(err)
-        return false
-    return true
+	var config := ConfigFile.new()
+	for b_idx in AudioServer.bus_count:
+		var b_name := AudioServer.get_bus_name(b_idx)
+		var b_volume := get_bus_volume(b_name)
+		config.set_value(SECTION_NAME,b_name,b_volume)
+	var err := config.save(CONFIG_FILE_PATH)
+	if err:
+		print_debug(err)
+		return false
+	return true
 
 
 func load_volume_settings():
-    var config := ConfigFile.new()
-    var err := config.load(CONFIG_FILE_PATH)
-    if err:
-        print_debug("The file cannot be opened. Creating another one")
-        save_volume_settings()
-    for key in config.get_section_keys(SECTION_NAME):
-        var volume = config.get_value(SECTION_NAME,key)
-        set_bus_volume(key,volume)
+	var config := ConfigFile.new()
+	var err := config.load(CONFIG_FILE_PATH)
+	if err:
+		print_debug("The file cannot be opened. Creating another one")
+		save_volume_settings()
+	for key in config.get_section_keys(SECTION_NAME):
+		var volume = config.get_value(SECTION_NAME,key)
+		set_bus_volume(key,volume)
 ```
 
 #### Bus volume
@@ -277,31 +277,31 @@ In this case however, there are no more configurable fields, so the config file 
 
 ```gdscript
 func _ready() -> void:
-    load_volume_settings()
+	load_volume_settings()
 
 
 func save_volume_settings():
-    var config := ConfigFile.new()
-    for b_idx in AudioServer.bus_count:
-        var b_name := AudioServer.get_bus_name(b_idx)
-        var b_volume := get_bus_volume(b_name)
-        config.set_value(SECTION_NAME,b_name,b_volume)
-    var err := config.save(CONFIG_FILE_PATH)
-    if err:
-        print_debug(err)
-        return false
-    return true
+	var config := ConfigFile.new()
+	for b_idx in AudioServer.bus_count:
+		var b_name := AudioServer.get_bus_name(b_idx)
+		var b_volume := get_bus_volume(b_name)
+		config.set_value(SECTION_NAME,b_name,b_volume)
+	var err := config.save(CONFIG_FILE_PATH)
+	if err:
+		print_debug(err)
+		return false
+	return true
 
 
 func load_volume_settings():
-    var config := ConfigFile.new()
-    var err := config.load(CONFIG_FILE_PATH)
-    if err:
-        print_debug("The file cannot be opened. Creating another one")
-        save_volume_settings()
-    for key in config.get_section_keys(SECTION_NAME):
-        var volume = config.get_value(SECTION_NAME,key)
-        set_bus_volume(key,volume)
+	var config := ConfigFile.new()
+	var err := config.load(CONFIG_FILE_PATH)
+	if err:
+		print_debug("The file cannot be opened. Creating another one")
+		save_volume_settings()
+	for key in config.get_section_keys(SECTION_NAME):
+		var volume = config.get_value(SECTION_NAME,key)
+		set_bus_volume(key,volume)
 ```
 
 Data is read once the component is ready by invoking `load_volume_settings()` . This method creates a config file object that reads the config file path and loops through the sound section getting the keys (the buse`s names) and assigning the corresponding volume value to each bus.
