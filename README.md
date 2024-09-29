@@ -144,57 +144,55 @@ class_name HighScoreManager extends Node
 const FILE_PATH = "user://high_scores.tres"
 
 func createHighScoresResource() -> HighScores:
-	var hs:HighScores = HighScores.new()
-	var err = ResourceSaver.save(hs,FILE_PATH)
-	if err:
-		print_debug("Error creating new resource")
-		return null
-		
-	else:
-		return hs
+    var hs:HighScores = HighScores.new()
+    var err = ResourceSaver.save(hs,FILE_PATH)
+    if err:
+        print_debug("Error creating new resource")
+        return null
+
+    else:
+        return hs
 
 func saveHighScore(playerName:String, score:int)->Array[HighScore]:
-	if ResourceLoader.exists(FILE_PATH):
-		var highScores:HighScores = ResourceLoader.load(FILE_PATH)
-		highScores.addHighScore(playerName,score)
-		var err = ResourceSaver.save(highScores, FILE_PATH)
-		if err:
-			print_debug("An error ocurred trying to save resource")
-			return [null]
-			
-		return highScores.getHighScores()
-	else:
-		print_debug("Resource didn't exist. Creating one")
-		var hs = createHighScoresResource()
-		if hs != [null]:
-			hs.addHighScore(playerName, score)
-			var err = ResourceSaver.save(hs,FILE_PATH)
-			if err:
-				print_debug("An error ocurred trying to save resource")
-				return [null]
-			return hs
-			
-		return [null]
+    if ResourceLoader.exists(FILE_PATH):
+        var highScores:HighScores = ResourceLoader.load(FILE_PATH)
+        highScores.addHighScore(playerName,score)
+        var err = ResourceSaver.save(highScores, FILE_PATH)
+        if err:
+            print_debug("An error ocurred trying to save resource")
+            return [null]
+
+        return highScores.getHighScores()
+    else:
+        print_debug("Resource didn't exist. Creating one")
+        var hs = createHighScoresResource()
+        if hs != [null]:
+            hs.addHighScore(playerName, score)
+            var err = ResourceSaver.save(hs,FILE_PATH)
+            if err:
+                print_debug("An error ocurred trying to save resource")
+                return [null]
+            return hs
+
+        return [null]
 
 func getHighScores()->Array[HighScore]:
-	if ResourceLoader.exists(FILE_PATH):
-		var highScores:HighScores = ResourceLoader.load(FILE_PATH)
-		return highScores.getHighScores()
-	else:
-		print_debug("There are no highScores")
-		return []
+    if ResourceLoader.exists(FILE_PATH):
+        var highScores:HighScores = ResourceLoader.load(FILE_PATH)
+        return highScores.getHighScores()
+    else:
+        print_debug("There are no highScores")
+        return []
 
 
 func clearHighScores()->bool:
-	var hs:HighScores = ResourceLoader.load(FILE_PATH)
-	hs.clearHighScores()
-	var err = ResourceSaver.save(hs,FILE_PATH)
-	if err == null:
-		print_debug("Error cleaning high scores")
-		return false
-	return true
-
-
+    var hs:HighScores = ResourceLoader.load(FILE_PATH)
+    hs.clearHighScores()
+    var err = ResourceSaver.save(hs,FILE_PATH)
+    if err == null:
+        print_debug("Error cleaning high scores")
+        return false
+    return true
 ```
 
 It uses `ResourceSaver` and `ResourceLoader` as a means to load and store this resource persistently in the `FILE_PATH` route.
@@ -214,50 +212,49 @@ const CONFIG_FILE_PATH = "user://settings.cfg"
 const SECTION_NAME = "Sound"
 
 func _ready() -> void:
-	load_volume_settings()
+    load_volume_settings()
 
 func set_bus_volume(b_name:String, n_vol:float)->bool:
-	var b_idx := AudioServer.get_bus_index(b_name)
-	if b_idx == -1: 
-		print_debug("Error retrieving bus index: The bus does not exist")
-		return false
-	#AudioServer.set_bus_volume_db(3)
-	AudioServer.set_bus_volume_db(b_idx,linear_to_db(n_vol))
-	bus_changed.emit(b_name)
-	return true
+    var b_idx := AudioServer.get_bus_index(b_name)
+    if b_idx == -1: 
+        print_debug("Error retrieving bus index: The bus does not exist")
+        return false
+    #AudioServer.set_bus_volume_db(3)
+    AudioServer.set_bus_volume_db(b_idx,linear_to_db(n_vol))
+    bus_changed.emit(b_name)
+    return true
 
 func get_bus_volume(b_name)->float:
-	var b_idx := AudioServer.get_bus_index(b_name)
-	if b_idx == -1: 
-		print_debug("Error retrieving bus index: The bus does not exist")
-		return false
-	var volume := AudioServer.get_bus_volume_db(b_idx)
-	return db_to_linear(volume)
+    var b_idx := AudioServer.get_bus_index(b_name)
+    if b_idx == -1: 
+        print_debug("Error retrieving bus index: The bus does not exist")
+        return false
+    var volume := AudioServer.get_bus_volume_db(b_idx)
+    return db_to_linear(volume)
 
 
 func save_volume_settings():
-	var config := ConfigFile.new()
-	for b_idx in AudioServer.bus_count:
-		var b_name := AudioServer.get_bus_name(b_idx)
-		var b_volume := get_bus_volume(b_name)
-		config.set_value(SECTION_NAME,b_name,b_volume)
-	var err := config.save(CONFIG_FILE_PATH)
-	if err:
-		print_debug(err)
-		return false
-	return true
+    var config := ConfigFile.new()
+    for b_idx in AudioServer.bus_count:
+        var b_name := AudioServer.get_bus_name(b_idx)
+        var b_volume := get_bus_volume(b_name)
+        config.set_value(SECTION_NAME,b_name,b_volume)
+    var err := config.save(CONFIG_FILE_PATH)
+    if err:
+        print_debug(err)
+        return false
+    return true
 
 
 func load_volume_settings():
-	var config := ConfigFile.new()
-	var err := config.load(CONFIG_FILE_PATH)
-	if err:
-		print_debug("The file cannot be opened. Creating another one")
-		save_volume_settings()
-	for key in config.get_section_keys(SECTION_NAME):
-		var volume = config.get_value(SECTION_NAME,key)
-		set_bus_volume(key,volume)
-
+    var config := ConfigFile.new()
+    var err := config.load(CONFIG_FILE_PATH)
+    if err:
+        print_debug("The file cannot be opened. Creating another one")
+        save_volume_settings()
+    for key in config.get_section_keys(SECTION_NAME):
+        var volume = config.get_value(SECTION_NAME,key)
+        set_bus_volume(key,volume)
 ```
 
 #### Bus volume
@@ -280,33 +277,31 @@ In this case however, there are no more configurable fields, so the config file 
 
 ```gdscript
 func _ready() -> void:
-	load_volume_settings()
+    load_volume_settings()
 
 
 func save_volume_settings():
-	var config := ConfigFile.new()
-	for b_idx in AudioServer.bus_count:
-		var b_name := AudioServer.get_bus_name(b_idx)
-		var b_volume := get_bus_volume(b_name)
-		config.set_value(SECTION_NAME,b_name,b_volume)
-	var err := config.save(CONFIG_FILE_PATH)
-	if err:
-		print_debug(err)
-		return false
-	return true
+    var config := ConfigFile.new()
+    for b_idx in AudioServer.bus_count:
+        var b_name := AudioServer.get_bus_name(b_idx)
+        var b_volume := get_bus_volume(b_name)
+        config.set_value(SECTION_NAME,b_name,b_volume)
+    var err := config.save(CONFIG_FILE_PATH)
+    if err:
+        print_debug(err)
+        return false
+    return true
 
 
 func load_volume_settings():
-	var config := ConfigFile.new()
-	var err := config.load(CONFIG_FILE_PATH)
-	if err:
-		print_debug("The file cannot be opened. Creating another one")
-		save_volume_settings()
-	for key in config.get_section_keys(SECTION_NAME):
-		var volume = config.get_value(SECTION_NAME,key)
-		set_bus_volume(key,volume)
-
-
+    var config := ConfigFile.new()
+    var err := config.load(CONFIG_FILE_PATH)
+    if err:
+        print_debug("The file cannot be opened. Creating another one")
+        save_volume_settings()
+    for key in config.get_section_keys(SECTION_NAME):
+        var volume = config.get_value(SECTION_NAME,key)
+        set_bus_volume(key,volume)
 ```
 
 Data is read once the component is ready by invoking `load_volume_settings()` . This method creates a config file object that reads the config file path and loops through the sound section getting the keys (the buse`s names) and assigning the corresponding volume value to each bus.
