@@ -1,12 +1,16 @@
 class_name HighScores extends Resource
 
+const MAX_SIZE = 10
+
 @export var _highScores:Array[HighScore] = []
 
 func addHighScore(name:String, score:int)->HighScore:
-	#var hs = {"name":name, "score":score}
 	var hs = HighScore.new(name,score)
 	_highScores.append(hs)
 	sortHighScores()
+	if _highScores.size() > MAX_SIZE:
+		print_debug("entro")
+		_highScores = _highScores.slice(0,MAX_SIZE)
 	return hs
 	
 func getHighScores() -> Array[HighScore]:
