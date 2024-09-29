@@ -1,0 +1,12 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgg65h7cl2c4j"]
+
+[ext_resource type="Script" path="res://UI/UISounds/ui_sounds.gd" id="1_f4e4k"]
+[ext_resource type="AudioStream" uid="uid://c02pd62kkytfi" path="res://sounds/assets/UI_Accept.wav" id="2_60j7i"]
+[ext_resource type="AudioStream" uid="uid://c6vh12ofj3qkk" path="res://sounds/assets/BlockExplosion.wav" id="3_35gle"]
+[ext_resource type="AudioStream" uid="uid://dkwjtxjd5wxos" path="res://sounds/assets/ball_hit2.wav" id="4_rgep5"]
+
+[node name="UISounds" type="Node"]
+script = ExtResource("1_f4e4k")
+accept_effect = ExtResource("2_60j7i")
+cancel_effect = ExtResource("3_35gle")
+focus_effect = ExtResource("4_rgep5")

@@ -30,8 +30,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="backBtn" type="Button" parent="MarginContainer/VBoxContainer/MenuContent/VBoxContainer" index="1"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Back"
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/MenuContent/VBoxContainer/backBtn" to="." method="_on_back_btn_button_down"]

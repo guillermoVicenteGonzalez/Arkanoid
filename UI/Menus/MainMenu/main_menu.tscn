@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfxxohlqmgev7"]
+[gd_scene load_steps=6 format=3 uid="uid://bfxxohlqmgev7"]
 
 [ext_resource type="Script" path="res://UI/Menus/MainMenu/main_menu.gd" id="1_hapwh"]
 [ext_resource type="Theme" uid="uid://df7kwgbt1u3iw" path="res://UI/themes/arkanoid_theme.tres" id="1_l2lj2"]
+[ext_resource type="PackedScene" uid="uid://dgg65h7cl2c4j" path="res://UI/UISounds/ui_sounds.tscn" id="1_psxel"]
 [ext_resource type="PackedScene" uid="uid://88knte4bfrke" path="res://UI/Menus/SettingsMenu/settings_menu.tscn" id="3_2vqju"]
 [ext_resource type="PackedScene" uid="uid://dafh4nmddbyt7" path="res://UI/Menus/level select/level_select.tscn" id="4_4dqu7"]
 
 [node name="mainMenuContainer" type="CanvasLayer"]
+
+[node name="UISounds" parent="." instance=ExtResource("1_psxel")]
+menu_root = NodePath("../root")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 unique_name_in_owner = true
